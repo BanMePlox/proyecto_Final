@@ -14,7 +14,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
