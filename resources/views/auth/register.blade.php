@@ -10,8 +10,18 @@
             @csrf
 
             <div>
+                <x-jet-label for="nif" value="{{ __('NIF') }}" />
+                <x-jet-input id="nif" class="block mt-1 w-full" type="text" name="nif" :value="old('nif')" required autofocus autocomplete="nif" />
+            </div>
+
+            <div>
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            </div>
+
+            <div>
+                <x-jet-label for="username" value="{{ __('Username') }}" />
+                <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
             </div>
 
             <div class="mt-4">
@@ -28,6 +38,10 @@
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
+
+
+
+
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
