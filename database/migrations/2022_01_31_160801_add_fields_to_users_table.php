@@ -15,7 +15,7 @@ class AddFieldsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('nif');
-            // $table->string('Address');
+            $table->string('address')->default('No');
             $table->string('username')->unique();
         });
     }
