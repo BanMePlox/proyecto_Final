@@ -33,3 +33,4 @@ class CreateCartsTable extends Migration
         Schema::dropIfExists('carts');
     }
 }
+/*Aqui ataca juan*/
