@@ -17,10 +17,12 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('name');
-            $table->string('description');
-            $table->binary('image');
-            $table->decimal('price');
-            $table->integer('stock');
+            $table->string('description')->nullable();
+            $table->string('file_path');
+            $table->decimal('price')->nullable();
+            $table->decimal('impuesto')->nullable();
+            $table->decimal('descuento')->nullable();
+            $table->integer('stock')->nullable();
             $table->timestamps();
         });
     }
