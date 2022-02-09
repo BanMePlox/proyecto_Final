@@ -61,4 +61,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function users() {
+        return $this->hasOne(Cart::class);
+    }
 }
