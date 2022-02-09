@@ -30,7 +30,6 @@
 <div>
 
 <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
-        <!-- Add CSRF Token -->
         @csrf
         <div class="form-group">
             <input type="file" name="file" required>
@@ -46,7 +45,11 @@
     </div>
 
     <div class="form-group">
-        <label>ID de categoría</label>
+        <select name="category_id" id="category_id" default="0">AAA</select>
+        @foreach ($categorias as $categoria)
+            <option value="{{$categoria->id}}">{{$categoria->name}}</option>
+        @endforeach
+
         <input type="number" name="category_id" required>
     </div>
 
