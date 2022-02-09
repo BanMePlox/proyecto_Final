@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-<p>blablabla</p>
+<form action="get">
+    <input type="text" id="name" placeholder="Pon el nombre">
+    <input type="submit" value="Enviar">
+</form>
 </body>
 </html>
