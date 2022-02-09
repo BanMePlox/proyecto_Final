@@ -8,7 +8,6 @@
 
         <form id="formulario" method="POST" action="{{ route('register') }}">
             @csrf
-
             <div>
                 <x-jet-label for="nif" value="{{ __('NIF') }}" />
                 <x-jet-input id="nif" class="block mt-1 w-full" type="text" name="nif" :value="old('nif')" required autofocus autocomplete="nif" />
@@ -65,7 +64,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-jet-button class="ml-4" type="submit">
+                <x-jet-button class="ml-4" id="btn-enviar" type="submit">
                     {{ __('Register') }}
                 </x-jet-button>
             </div>

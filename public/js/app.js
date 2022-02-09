@@ -5492,6 +5492,110 @@ function myFunction() {
 }
 
 window.myFunction = myFunction;
+var btnEnviar = document.querySelector('#btn-enviar');
+
+var validate = function validate(e) {
+  e.preventDefault();
+  var nombre = document.querySelector('#name');
+  var nif = document.querySelector('#nif');
+  var email = document.querySelector('#email');
+  var password = document.querySelector('#password');
+  var password_confirmation = document.querySelector('#password_confirmation');
+  var nombreDeUsuario = document.querySelector('#username');
+  var formulario = document.querySelector('#formulario');
+
+  if (nombreDeUsuario.textContent === "") {
+    var div = document.createElement('div');
+    div.classList.add('error');
+    Object.assign(div.style, {
+      width: '100%',
+      height: '20%',
+      backgroundColor: '#ffd1d1',
+      color: 'black'
+    });
+    div.textContent = 'El nombre no es corecto';
+    formulario.prepend(div);
+  }
+
+  if (nif.textContent === "") {
+    var _div = document.createElement('div');
+
+    _div.classList.add('error');
+
+    Object.assign(_div.style, {
+      width: '100%',
+      height: '20%',
+      backgroundColor: '#ffd1d1',
+      color: 'black'
+    });
+    _div.textContent = 'El nif no es correcto';
+    formulario.prepend(_div);
+  }
+
+  if (nombre.textContent === "") {
+    var _div2 = document.createElement('div');
+
+    _div2.classList.add('error');
+
+    Object.assign(_div2.style, {
+      width: '100%',
+      height: '20%',
+      backgroundColor: '#ffd1d1',
+      color: 'black'
+    });
+    _div2.textContent = 'El username no es corecto';
+    formulario.prepend(_div2);
+  }
+
+  if (email.textContent === "") {
+    var _div3 = document.createElement('div');
+
+    _div3.classList.add('error');
+
+    Object.assign(_div3.style, {
+      width: '100%',
+      height: '20%',
+      backgroundColor: '#ffd1d1',
+      color: 'black'
+    });
+    _div3.textContent = 'El email no es corecto';
+    formulario.prepend(_div3);
+  }
+
+  if (password.textContent === "") {
+    var _div4 = document.createElement('div');
+
+    _div4.classList.add('error');
+
+    Object.assign(_div4.style, {
+      width: '100%',
+      height: '20%',
+      backgroundColor: '#ffd1d1',
+      color: 'black'
+    });
+    _div4.textContent = 'La conttraseña no es corecta';
+    formulario.prepend(_div4);
+  }
+
+  if (password.textContent !== password_confirmation.textContent) {
+    var _div5 = document.createElement('div');
+
+    _div5.classList.add('error');
+
+    Object.assign(_div5.style, {
+      width: '100%',
+      height: '20%',
+      backgroundColor: '#ffd1d1',
+      color: 'black'
+    });
+    _div5.textContent = 'La contraseña no es igual';
+    formulario.prepend(_div5);
+  }
+
+  return true;
+};
+
+btnEnviar.addEventListener('click', validate);
 
 /***/ }),
 
