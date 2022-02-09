@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -35,8 +36,35 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        {
+            // Validate the inputs
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ]);
+
+            if ($request->hasFile('file')) {
+
+                $request->validate([
+                    'image' => 'mimes:jpeg,bmp,png'
+                ]);
+
+                $request->file->store('product', 'public');
+
+                $product = new Product([
+                    "name" => $request->get('name'),
+                    "description" => $request->get('description'),
+                    "price" => $request->get('price'),
+                    "impuesto" => $request->get('impuesto'),
+                    "descuento" => $request->get('descuento'),
+                    "stock" => $request->get('stock'),
+                    "category_id" => $request->get('category_id'),
+                    "file_path" => $request->file->hashName()
+                ]);
+                $product->save();
+            }
     }
+}
 
     /**
      * Display the specified resource.
