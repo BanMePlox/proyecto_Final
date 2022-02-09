@@ -16,7 +16,6 @@
     </style>
 </head>
 <body>
-<!-- if validation in the controller fails, show the errors -->
 @if ($errors->any())
    <div class="alert alert-danger">
      <ul>

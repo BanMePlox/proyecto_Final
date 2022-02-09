@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
+        return view ('categories.index');
 
     }
 
@@ -25,8 +25,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('categories.create');
     }
 
     /**
@@ -37,10 +35,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->get('name');
-        $category->save;
-        return view ('categories.index');
     }
 
     /**
