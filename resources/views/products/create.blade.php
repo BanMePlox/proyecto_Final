@@ -6,7 +6,7 @@
 
     <title>Laravel</title>
 
-    <!-- Fonts -->
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -31,11 +31,11 @@
 <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <input type="file" name="file" required>
+            <input type="file" name="file">
         </div>
     <div class="form-group">
-        <label>Product Name</label>
-        <input type="text" class="form-control" name="name" required>
+        <label>Nombre</label>
+        <input type="text" class="form-control" name="name" default="a" required>
     </div>
 
     <div class="form-group">
@@ -44,32 +44,32 @@
     </div>
 
     <div class="form-group">
-        <select name="category_id" id="category_id" default="0">AAA</select>
+        Categoria
+        <select name="category_id" id="category_id" default="4">
         @foreach ($categorias as $categoria)
             <option value="{{$categoria->id}}">{{$categoria->name}}</option>
         @endforeach
-
-        <input type="number" name="category_id" required>
+    </select>
     </div>
 
     <div class="form-group">
         <label>Precio</label>
-        <input type="number" class="form-control" name="price" required>
+        <input type="number" class="form-control" name="price" required default="1" >
     </div>
 
     <div class="form-group">
         <label>Impuestos</label>
-        <input type="number" class="form-control" name="impuesto" required>
+        <input type="number" class="form-control" name="impuesto" requireddefault="1" >
     </div>
 
     <div class="form-group">
         <label>% de descuento</label>
-        <input type="number" class="form-control" name="descuento" required>
+        <input type="number" class="form-control" name="descuento" required default="1" >
     </div>
 
     <div class="form-group">
         <label>Stock</label>
-        <input type="number" class="form-control" name="stock" required>
+        <input type="number" class="form-control" name="stock" required default="1" >
     </div>
     <button type="submit">Submit</button>
 </form>

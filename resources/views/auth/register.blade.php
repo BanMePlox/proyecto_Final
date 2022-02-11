@@ -10,7 +10,7 @@
             @csrf
             <div>
                 <x-jet-label for="nif" value="{{ __('NIF') }}" />
-                <x-jet-input id="nif" class="block mt-1 w-full" type="text" name="nif" :value="old('nif')" required autofocus autocomplete="nif" />
+                <x-jet-input id="nif" class="block mt-1 w-full" type="text" name="nif" :value="old('nif')" required autofocus autocomplete="nif"  />
             </div>
 
             <div>
