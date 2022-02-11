@@ -66,20 +66,11 @@
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
-<<<<<<< HEAD
-=======
-        {{-- <!-- Adress -->
->>>>>>> c4760da32fb6ba5afc9e40906f734cdb2c5ef7e5
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="address" value="{{ __('Dirección') }}" />
             <x-jet-input id="address" type="address" class="mt-1 block w-full" wire:model.defer="state.address" autocomplete="address" />
             <x-jet-input-error for="address" class="mt-2" />
-<<<<<<< HEAD
         </div>
-=======
-        </div> --}}
-
->>>>>>> c4760da32fb6ba5afc9e40906f734cdb2c5ef7e5
     </x-slot>
 
     <x-slot name="actions">
