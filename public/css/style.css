@@ -72,27 +72,51 @@ a {
 /** Productos mas vendidos**/
 .mas__vendidos{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(5,1fr);
     gap: 30px;
 }
 .producto{
-    border: 2px solid black;
-    border-radius: 25px;
     display: block;
     text-align: center;
+    margin-top: 20px;
+}
+.imagen__producto{
+    width: 200px;
+    height: 200px;
 }
 
-.btn__producto{
-    background-color: green;
-    color: white;
-    border: 1px solid green;
-    border-radius: 55px;
-    padding: 10px 10px;
+.producto:hover{
+    border: 1px solid #DBD6D5;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
 
+.btn__producto{
+    border: 1px solid yellow;
+    border-radius: 55px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+}
+.btn__producto:hover{
+    background-color: yellow;
 }
 .producto__texto{
     padding-bottom: 20px;
+    text-align: left;
+    padding-left: 10px;
 }
+
+.producto__texto p{
+    font-size: 15px;
+}
+
+.boton{
+    margin-bottom: 20px;
+}
+
 
 /**PIE**/
 
@@ -125,6 +149,9 @@ a {
     }
     .linea__media {
         margin-top: 20px;
+    }
+    .mas__vendidos{
+        grid-template-columns: repeat(2,1fr);
     }
 
 }
