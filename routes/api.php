@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ProductApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AddProductsControladorApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/apiproducts', ProductApiController::class);
 // Route::apiResource('/apiusers', UserApiController::class);
 // Route::apiResource('/apicategories', CategoryApiController::class);
+Route::apiResource('/productos',AddProductsControladorApiController::class)->
+        parameters(['productos'=> 'product']);
 
