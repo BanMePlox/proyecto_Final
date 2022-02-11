@@ -8,7 +8,7 @@
         {{$product->description}}
         <br>
         Imagen del producto:
-        <img src="{{ asset('storage/products/' . $product->file_path)}}">
+        <img src="{{Storage::url('product/'.$product->file_path)}}">
          <br><br>
     @empty
         No hay productos.
