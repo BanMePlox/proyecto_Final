@@ -1,4 +1,3 @@
-{{-- @extends('layout')
- --}}
+@extends('layouts.layout')
 
-aa
+@section('body')

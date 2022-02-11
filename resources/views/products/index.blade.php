@@ -1,3 +1,5 @@
+    @extends('layouts.layout')
+    @section('body')
     <h1>Listado de productos</h1>
     @forelse ($products as $product)
         <a href="{{route('products.show', $product->id)}}">{{$product->name}}</a>
@@ -11,4 +13,4 @@
     @empty
         No hay productos.
     @endforelse
-
+    @endsection
