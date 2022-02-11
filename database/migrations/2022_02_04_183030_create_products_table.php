@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id')->default(0);
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('file_path');
+            $table->string('file_path')->nullable();
             $table->decimal('price')->nullable();
             $table->decimal('impuesto')->nullable();
             $table->decimal('descuento')->nullable();

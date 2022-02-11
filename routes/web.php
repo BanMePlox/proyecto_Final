@@ -27,5 +27,3 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resource('/users',UserController::class);
 
-Route::resource('products', 'App\Http\Controllers\ProductController');
-
