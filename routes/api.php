@@ -19,6 +19,10 @@ use App\Http\Controllers\Api\AddProductsControladorApiController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/apiproducts', ProductApiController::class);
+// Route::apiResource('/apiusers', UserApiController::class);
+// Route::apiResource('/apicategories', CategoryApiController::class);
 Route::apiResource('/productos',AddProductsControladorApiController::class)->
         parameters(['productos'=> 'product']);
 
