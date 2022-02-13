@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/products');
 });
 
 Route::get('/test', function () {
@@ -32,5 +32,5 @@ Route::resource('/users',UserController::class);
 Route::resource('products', 'App\Http\Controllers\ProductController');
 
 Route::resource('categories', 'App\Http\Controllers\CategoryController');
-    
+
 
