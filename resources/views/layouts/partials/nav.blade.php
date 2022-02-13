@@ -1,6 +1,6 @@
 <header>
     <nav class="cabecera">
-        <img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo">
+        <a href="{{route('products.index')}}"><img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo"></a>
         <div id="buscador">
             <form action="">
             <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
