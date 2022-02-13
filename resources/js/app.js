@@ -91,3 +91,12 @@ const validate = (e) => {
     }
     //Evento del boton
 btnEnviar.addEventListener('click', validate);
+
+//Añadir al carrito
+function agregarProductoCarrito(let idProducto,
+    let unidades,
+        let precio) {
+    let listaCarrito = {};
+
+
+}

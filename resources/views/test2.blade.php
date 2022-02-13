@@ -13,7 +13,7 @@
   </form>
 
   <script>
-     /* const formElem = document.querySelector('#formElem');
+      const formElem = document.querySelector('#formElem');
     formElem.onsubmit = async (e) => {
       e.preventDefault();
 
@@ -23,20 +23,6 @@
       });
 
       let result = await response.json();
-
-    };*/
-    const formElem = document.querySelector('#formElem');
-    formElem.onsubmit = async (e) => {
-      e.preventDefault();
-
-      let response = await fetch('api/products', {
-        method: 'GET'
-      });
-
-      let result = await response.json();
-      for (let i = 0; i < result.length; i++) {
-          console.log(result[i].name);
-      }
     };
   </script>
 </body>

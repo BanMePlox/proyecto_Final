@@ -11,7 +11,7 @@
                 <div class="producto__texto">
                     <h3>{{$product->name}}</h3>
                     <p>{{$product->price}}€</p>
-                    <a class="btn__producto" href="#">Añadir al carrito</a>
+                    <a class="btn__producto" id="btn_carrito"href="#" click="agregarProductoCarrito({{$product->id}})">Añadir al carrito</a>
                 </div>
             </div>
             @empty

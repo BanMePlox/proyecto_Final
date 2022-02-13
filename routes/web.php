@@ -22,7 +22,9 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view('test', );
 });
-
+Route::get('/test2', function () {
+    return view('test2', );
+});
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -32,5 +34,5 @@ Route::resource('/users',UserController::class);
 Route::resource('products', 'App\Http\Controllers\ProductController');
 
 Route::resource('categories', 'App\Http\Controllers\CategoryController');
-    
+
 
