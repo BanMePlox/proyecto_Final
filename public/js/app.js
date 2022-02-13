@@ -5479,121 +5479,111 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start(); //Validaciones de formulario de registro.
+//Recogemos el boton de enviar
 
-function myFunction() {
-  var x = document.querySelector("#myTopnav");
-
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
-window.myFunction = myFunction;
 var btnEnviar = document.querySelector('#btn-enviar');
+var div = document.createElement('div');
+div.classList.add('error');
+var botonCSS = {
+  width: '100%',
+  height: '20%',
+  backgroundColor: '#ffd1d1',
+  color: 'black',
+  border: '1px solid red',
+  marginBottom: '5px'
+};
+Object.assign(div.style, botonCSS);
 
 var validate = function validate(e) {
   e.preventDefault();
-  var nombre = document.querySelector('#name');
-  var nif = document.querySelector('#nif');
-  var email = document.querySelector('#email');
-  var password = document.querySelector('#password');
-  var password_confirmation = document.querySelector('#password_confirmation');
-  var nombreDeUsuario = document.querySelector('#username');
-  var formulario = document.querySelector('#formulario');
+  var form = document.forms[0]; //Estilo para los errores
+  //Validacion del username
 
-  if (nombreDeUsuario.textContent === "") {
-    var div = document.createElement('div');
-    div.classList.add('error');
-    Object.assign(div.style, {
-      width: '100%',
-      height: '20%',
-      backgroundColor: '#ffd1d1',
-      color: 'black'
-    });
-    div.textContent = 'El nombre no es corecto';
+  if (form.username.value.length === 0) {
+    div.textContent = 'El Username esta vacio';
+    formulario.prepend(div); //Mostrara los errores por x tiempo.
+
+    setTimeout(function () {
+      return div.remove();
+    }, 2000);
+  } else {
+    if (form.username.value.length <= 4) {
+      div.textContent = 'El Username debe tener mas de 4 caracteres';
+      formulario.prepend(div);
+      setTimeout(function () {
+        return div.remove();
+      }, 2000);
+    }
+  }
+
+  if (form.nif.value.length != 9) {
+    div.textContent = 'El nif no es correcto';
     formulario.prepend(div);
+    setTimeout(function () {
+      return div.remove();
+    }, 2000);
+  } else {
+    for (var i = 0; i < form.nif.value.length; i++) {
+      if (i <= 7) {
+        if (form.nif.value[i].isNaN() === true) {
+          continue;
+        } else {
+          div.textContent = 'El nif no esta en el formato correcto';
+          formulario.prepend(div);
+          setTimeout(function () {
+            return div.remove();
+          }, 2000);
+        }
+      } else {
+        if (form.nif.value[i].isNaN() === false) {
+          continue;
+        } else {
+          div.textContent = 'El nif no esta en el formato correcto';
+          formulario.prepend(div);
+          setTimeout(function () {
+            return div.remove();
+          }, 2000);
+        }
+      }
+    }
   }
 
-  if (nif.textContent === "") {
-    var _div = document.createElement('div');
-
-    _div.classList.add('error');
-
-    Object.assign(_div.style, {
-      width: '100%',
-      height: '20%',
-      backgroundColor: '#ffd1d1',
-      color: 'black'
-    });
-    _div.textContent = 'El nif no es correcto';
-    formulario.prepend(_div);
+  if (form.name.value.length === 0) {
+    div.textContent = 'El nombre esta vacio';
+    formulario.prepend(div);
+    setTimeout(function () {
+      return div.remove();
+    }, 2000);
   }
 
-  if (nombre.textContent === "") {
-    var _div2 = document.createElement('div');
-
-    _div2.classList.add('error');
-
-    Object.assign(_div2.style, {
-      width: '100%',
-      height: '20%',
-      backgroundColor: '#ffd1d1',
-      color: 'black'
-    });
-    _div2.textContent = 'El username no es corecto';
-    formulario.prepend(_div2);
+  if (form.email.value.length === 0) {
+    div.textContent = 'El email esta vacio';
+    formulario.prepend(div);
+    setTimeout(function () {
+      return div.remove();
+    }, 2000);
   }
 
-  if (email.textContent === "") {
-    var _div3 = document.createElement('div');
-
-    _div3.classList.add('error');
-
-    Object.assign(_div3.style, {
-      width: '100%',
-      height: '20%',
-      backgroundColor: '#ffd1d1',
-      color: 'black'
-    });
-    _div3.textContent = 'El email no es corecto';
-    formulario.prepend(_div3);
+  if (form.password.value.length === 0) {
+    div.textContent = 'La conttraseña esta vacia';
+    formulario.prepend(div);
+    setTimeout(function () {
+      return div.remove();
+    }, 2000);
   }
 
-  if (password.textContent === "") {
-    var _div4 = document.createElement('div');
-
-    _div4.classList.add('error');
-
-    Object.assign(_div4.style, {
-      width: '100%',
-      height: '20%',
-      backgroundColor: '#ffd1d1',
-      color: 'black'
-    });
-    _div4.textContent = 'La conttraseña no es corecta';
-    formulario.prepend(_div4);
-  }
-
-  if (password.textContent !== password_confirmation.textContent) {
-    var _div5 = document.createElement('div');
-
-    _div5.classList.add('error');
-
-    Object.assign(_div5.style, {
-      width: '100%',
-      height: '20%',
-      backgroundColor: '#ffd1d1',
-      color: 'black'
-    });
-    _div5.textContent = 'La contraseña no es igual';
-    formulario.prepend(_div5);
+  if (form.password_confirm.value.length === 0) {
+    div.textContent = 'La contraseña esta vacia';
+    formulario.prepend(div);
+    setTimeout(function () {
+      return div.remove();
+    }, 2000);
   }
 
   return true;
-};
+}; //Evento del boton
+
 
 btnEnviar.addEventListener('click', validate);
 
@@ -23064,7 +23054,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -23078,20 +23068,20 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
@@ -23124,7 +23114,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			return result;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -23136,7 +23126,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -23148,12 +23138,12 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -23164,7 +23154,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -23173,11 +23163,11 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
-/******/
+/******/ 		
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
@@ -23185,19 +23175,19 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			"/js/app": 0,
 /******/ 			"css/app": 0
 /******/ 		};
-/******/
+/******/ 		
 /******/ 		// no chunk on demand loading
-/******/
+/******/ 		
 /******/ 		// no prefetching
-/******/
+/******/ 		
 /******/ 		// no preloaded
-/******/
+/******/ 		
 /******/ 		// no HMR
-/******/
+/******/ 		
 /******/ 		// no HMR manifest
-/******/
+/******/ 		
 /******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/
+/******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
@@ -23222,20 +23212,20 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
-/******/
+/******/ 		
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
-/******/
+/******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/
+/******/ 	
 /******/ })()
 ;
