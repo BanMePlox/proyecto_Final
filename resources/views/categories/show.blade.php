@@ -1,11 +1,8 @@
 @extends('layouts.layout')
 @section('body')
 @forelse ($products as $product)
-    @if ($request->route)
-    a
-    @endif
-@empty
 
+@empty
+joder joder joder
 @endforelse
 @endsection
-{{-- ESTO ESTÁ MAL TENGO QUE ARREGLARLO AUN --}}

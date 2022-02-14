@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->decimal('impuesto')->nullable();
             $table->decimal('descuento')->nullable();
             $table->integer('stock')->nullable();
+            $table->boolean('disponible')->default(1);
             $table->timestamps();
         });
     }

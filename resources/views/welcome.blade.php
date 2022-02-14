@@ -6,6 +6,7 @@
         <h2>Los mas vendidos</h2>
         <section class="mas__vendidos">
             @forelse($products as $product)
+            @if ($product->disponible = "1")
             <div class="producto">
 <<<<<<< HEAD
                 <img src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen productos">
@@ -26,6 +27,7 @@
 >>>>>>> 50a1f68ebe211a8ec99d791881673eb7265c3bf1
                 </div>
             </div>
+            @endif
             @empty
             No hay productos
             @endforelse
