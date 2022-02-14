@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +32,29 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('products/stock', function() {
+
+//RUTAS DE ADMIN (NO HAY CONTROLADOR POR ESO HAY TANTAS PERDONADME)
+Route::get('admin/stock', function() {
     $products = Product::all();
-    return view('products.stock', compact('products'));
-})->middleware('admin');
+    return view('admin/stock', compact('products'));
+})->name('Stock');// ->middleware('admin');
+
+Route::get('admin/products', function() {
+    $products = Product::all();
+    return view('admin/products', compact('products'));
+})->name('Productos');// ->middleware('admin');
+
+Route::get('admin/users', function() {
+    $users = User::all();
+    return view('admin/users', compact('users'));
+})->name('Usuarios');// ->middleware('admin');
+
+Route::get('admin/index', function() {
+    return view('admin/index');
+});// ->middleware('admin');
+
+
+//RECURSOS
 
 Route::resource('/users',UserController::class);
 
