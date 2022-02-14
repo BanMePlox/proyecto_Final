@@ -49,7 +49,7 @@ class ProductController extends Controller
             if ($request->hasFile('file')) {
 
                 $request->validate([
-                    'image' => 'mimes:jpeg,bmp,png'
+                    'image' => 'mimes:jpeg,bmp,png,webp'
                 ]);
 
                 $request->file->store('product', 'public');

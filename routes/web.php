@@ -4,6 +4,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +30,11 @@ Route::get('/test2', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('products/stock', function() {
+    $products = Product::all();
+    return view('products.stock', compact('products'));
+})->middleware('admin');
 
 Route::resource('/users',UserController::class);
 

@@ -6,6 +6,7 @@
         <h2>Los mas vendidos</h2>
         <section class="mas__vendidos">
             @forelse($products as $product)
+            @if ($product->disponible = "1")
             <div class="producto">
                 <a href="{{Route('products.show', $product->id)}}">
                     <img class="imagen__producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Productos">
@@ -18,6 +19,7 @@
                     <a class="btn__producto" href="#">Añadir al carrito</a>
                 </div>
             </div>
+            @endif
             @empty
             No hay productos
             @endforelse
