@@ -13,7 +13,7 @@
   </form>--}}
 
 
-  @section('body')
+
 
   <header>
     <nav class="cabecera">
@@ -61,6 +61,7 @@ async function estructura() {
   method: 'GET'
 });
 json = await response.json();
+console.log(json);
 // Estructura
 const div2 = document.querySelector('.producto');
 json.forEach((producto)=>{
@@ -71,7 +72,10 @@ h3.textContent = producto.name;
 const boton = document.createElement('button');
 boton.classList.add('btn', 'btn-primary','btn__producto');
 boton.textContent="Añadir al carrito";
-boton.addEventListener('click',function(){carrito.push(producto.id); actualizarCarrito();});
+boton.addEventListener('click',function(){
+    carrito.push(producto.id);
+    actualizarCarrito();
+});
 div2.append(div);
 div.append(h3);
 div.append(boton);
@@ -83,6 +87,31 @@ div.append(boton);
 
 
 }
+async function actualizarCarrito() {
+    let response = await fetch('api/products', { method: 'GET' });
+    let products = await response.json();
+
+    products.forEach((producto)=>{
+        for (let id of carrito){
+            if(producto.id === id) {
+                anyadirCarrito(producto.id);
+                break;
+            }
+        }
+    })
+};
+async function anyadirCarrito(id) {
+        let producto = {amount:id};
+        let response = await fetch('api/cart', {
+        method: 'POST',
+        body: JSON.stringify(producto),
+      });
+      respuesta = await response.json();
+      const carro = document.querySelector('#cart');
+    carro.textContent=carrito.lenght;
+    }
+
+
 
 
 
@@ -284,4 +313,3 @@ f();*/
 </script>
 
 </html>
-@endsection

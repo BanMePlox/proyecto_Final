@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\Cart;
 use Illuminate\Http\Request;
-class ListProductApiController extends Controller
+
+class CartApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class ListProductApiController extends Controller
      */
     public function index()
     {
-        $sql = 'SELECT * FROM products';
-        $products = DB::select($sql);
-        return response()->json($products,200);
+        //
     }
 
     /**
@@ -28,16 +26,19 @@ class ListProductApiController extends Controller
      */
     public function store(Request $request)
     {
-
+        $cart= new Cart();
+        $cart->product_id = $request->get('product_id');
+        $cart->save();
+        return response()->json($cart,200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ListProduct  $listProduct
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(ListProduct $listProduct)
+    public function show(Cart $cart)
     {
         //
     }
@@ -46,10 +47,10 @@ class ListProductApiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ListProduct  $listProduct
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ListProduct $listProduct)
+    public function update(Request $request, Cart $cart)
     {
         //
     }
@@ -57,10 +58,10 @@ class ListProductApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ListProduct  $listProduct
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ListProduct $listProduct)
+    public function destroy(Cart $cart)
     {
         //
     }
