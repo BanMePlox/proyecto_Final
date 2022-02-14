@@ -11,7 +11,7 @@
             <a href="#">Categorias</a>
             <a href="{{route('login')}}">Login</a>
             <a href="{{route('register')}}">Registrate</a>
-            <a href="#" id="cart"><img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito" id="carro"></a>
+            <button href="#" id="cart"><img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito" id="carro"></button>
         </div>
 
     </nav>
