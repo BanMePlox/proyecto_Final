@@ -93,10 +93,14 @@ const validate = (e) => {
 btnEnviar.addEventListener('click', validate);
 
 //Añadir al carrito
-function agregarProductoCarrito(let idProducto,
-    let unidades,
-        let precio) {
-    let listaCarrito = {};
+let listaCarrito = {};
 
+function agregarProductoCarrito(idProducto,
+    unidades,
+    precio) {
+    this.idProducto = idProducto;
+    this.unidades = unidades;
+    this.precio = precio;
 
+    listaCarrito = { IdProducto: this.idProducto, unidades: this.unidades, precio: this.precio };
 }

@@ -5585,7 +5585,20 @@ var validate = function validate(e) {
 }; //Evento del boton
 
 
-btnEnviar.addEventListener('click', validate);
+btnEnviar.addEventListener('click', validate); //Añadir al carrito
+
+var listaCarrito = {};
+
+function agregarProductoCarrito(idProducto, unidades, precio) {
+  this.idProducto = idProducto;
+  this.unidades = unidades;
+  this.precio = precio;
+  listaCarrito = {
+    IdProducto: this.idProducto,
+    unidades: this.unidades,
+    precio: this.precio
+  };
+}
 
 /***/ }),
 
