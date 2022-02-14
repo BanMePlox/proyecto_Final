@@ -6,6 +6,9 @@
 .azul {
     color: var(--colorPrincipal);
 }
+ul{
+    list-style: none;
+}
 
 button {
     background: none;
@@ -60,14 +63,44 @@ a {
 #buscador input:focus {
     outline: 0;
 }
-.linea__media{
+#linea__media{
+    margin-top: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.linea__media a{
+#linea__media a{
     padding-right: 40px;
 }
+#linea__media li>a{
+    background-color: white;
+    color: black;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    min-width: 100px;
+}
+#linea__media li>a:hover{
+    color: #000;
+    background-color: gray;
+    border: 1px solid black;
+}
+#linea__media>li{
+    float: left;
+    position: relative;
+    text-align:center
+}
+#linea__media>li>ul{
+    display: none;
+}
+#linea__media>li:hover>ul {
+      display:block;
+      padding: 0;
+}
+#desplegable{
+    position: absolute;
+}
+
 
 /** Productos mas vendidos**/
 .mas__vendidos{
