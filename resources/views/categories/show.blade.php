@@ -1,11 +1,12 @@
+@extends('layouts.layout')
+
+@section('body')
 @forelse ($products as $product)
-<h1>{{$product->name}}</h1>
-<div>
-    <a href="{{route('products.show', $product->id)}}">{{$product->name}}</a>
-     <br><br>
-</div>
+    @if ($product->category_id == {{$request->id}})
+    a
+    @endif
 @empty
-
+No hay categorías
 @endforelse
-
+@endsection
 {{-- ESTO ESTÁ MAL TENGO QUE ARREGLARLO AUN --}}
