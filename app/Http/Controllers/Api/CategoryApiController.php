@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
@@ -16,7 +16,10 @@ class CategoryApiController extends Controller
      */
     public function index()
     {
-        //
+
+        $sql = 'SELECT id, name FROM categories';
+        $categories = DB::select($sql);
+        return response()->json($categories,200);
     }
 
     /**
