@@ -35,17 +35,17 @@
         </div>
     <div class="form-group">
         <label>Nombre</label>
-        <input type="text" class="form-control" name="name" default="a" required>
+        <input type="text" class="form-control" name="name" default="a" required value="Carne">
     </div>
 
     <div class="form-group">
         <label>Description</label>
-        <input type="text" name="description" required>
+        <input type="text" name="description" required value="Roja">
     </div>
 
     <div class="form-group">
         Categoria
-        <select name="category_id" id="category_id" default="4">
+        <select name="category_id" id="category_id" default="1">
         @foreach ($categorias as $categoria)
             <option value="{{$categoria->id}}">{{$categoria->name}}</option>
         @endforeach
@@ -54,22 +54,22 @@
 
     <div class="form-group">
         <label>Precio</label>
-        <input type="number" class="form-control" name="price" required default="1" >
+        <input type="number" class="form-control" name="price" required value="1">
     </div>
 
     <div class="form-group">
         <label>Impuestos</label>
-        <input type="number" class="form-control" name="impuesto" requireddefault="1" >
+        <input type="number" class="form-control" name="impuesto" required value="1">
     </div>
 
     <div class="form-group">
         <label>% de descuento</label>
-        <input type="number" class="form-control" name="descuento" required default="1" >
+        <input type="number" class="form-control" name="descuento" required value="1">
     </div>
 
     <div class="form-group">
         <label>Stock</label>
-        <input type="number" class="form-control" name="stock" required default="1" >
+        <input type="number" class="form-control" name="stock" required value="1" >
     </div>
     <button type="submit">Submit</button>
 </form>
