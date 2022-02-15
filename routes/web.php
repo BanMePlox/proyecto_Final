@@ -56,11 +56,12 @@ Route::get('admin/users', function() {
 
 Route::get('admin/index', function() {
     $users = User::all();
-    if ($users->admin->NULL) {
-        return redirect('welcome');
-    }
     return view('admin/index', compact('users'));
-})->middleware('admin');
+})->middleware('admin')->name('indexadmin');
+
+Route::get('profile/show', function() {
+    return view('profile/show');
+})->name('profile');
 
 
 //RECURSOS
