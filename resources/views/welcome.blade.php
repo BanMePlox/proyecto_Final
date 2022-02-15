@@ -13,7 +13,7 @@
                 <a href="{{Route('products.show', $product->id)}}">
                     <img class="imagen__producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Productos">
                     <div class="producto__texto">
-                        <p>{{$product->name}}</p>
+                        <p class="nom__pro">{{$product->name}}</p>
                         <p>{{$product->price}}€</p>
                     </div>
                 </a>
