@@ -29,7 +29,7 @@
                         <li><a href="{{route('indexadmin')}}">Administración</a></li>
                     @endif
                     @if (Auth::user()->admin == 0)
-                        <li><a href="{{route('profile')}}">Gestión de usuario</a></li>
+                        <li><a href="{{route('profile.show')}}">Gestión de usuario</a></li>
                     @endif
 
 

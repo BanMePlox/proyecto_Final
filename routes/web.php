@@ -63,6 +63,10 @@ Route::get('profile/show', function() {
     return view('profile/show');
 })->name('profile');
 
+Route::get('cart', function() {
+    return view('cart');
+})->name('carrito');
+
 
 //RECURSOS
 
