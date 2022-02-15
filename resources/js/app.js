@@ -8,7 +8,7 @@ Alpine.start();
 
 //Validaciones de formulario de registro.
 //Recogemos el boton de enviar
-const btnEnviar = document.querySelector('#btn-enviar');
+/*const btnEnviar = document.querySelector('#btn-enviar');
 let div = document.createElement('div');
 div.classList.add('error');
 let botonCSS = {
@@ -106,7 +106,7 @@ let listaCarrito = {};
 }*/
 
 //El administrados gestiona productos.
-
+/*
 const formElem = document.querySelector('#formElem_anyadir');
 formElem.onsubmit = async(e) => {
     e.preventDefault();
@@ -118,56 +118,6 @@ formElem.onsubmit = async(e) => {
 
     let result = await response.json();
 };
-//Añadir productos
-/*const boton_anyadir = document.querySelector('#boton_anyadir');
-
-boton_anyadir.addEventListener('click',
-    formElem.onsubmit = async(e) => {
-        e.preventDefault();
-
-        let response = await fetch('api/productos', {
-            method: 'POST',
-            body: new FormData(formElem)
-        });
-
-        let result = await response.json();
-    }
-); * /
-const formElem = document.querySelector('#formElem_anyadir');
-const boton_anyadir = document.querySelector('#boton_anyadir');
-boton_anyadir.addEventListener('click',
-
-    formElem.onsubmit = async(e) => {
-        e.preventDefault();
-
-        let response = await fetch('api/productos', {
-            method: 'POST',
-            body: new FormData(formElem)
-        });
-
-        let result = await response.json();
-    }
-);*/
 
 
-
-
-
-//Recpoge el click en Categorias
-const pescado = document.querySelector('#Pescado');
-const carne = document.querySelector('#Carne');
-
-async function id_pescado() {
-
-};
-pescado.onsubmit = async(e) => {
-    e.preventDefault();
-    let id = 2;
-    let response = await fetch('api/products/' + id);
-    let products = await response.json();
-    console.log(products);
-};
-//Aña
-pescado.addEventListener('click', id_pescado);
-
-//Crear estructura de los productos
+*/
