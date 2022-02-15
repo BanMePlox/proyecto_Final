@@ -169,5 +169,4 @@ pescado.onsubmit = async(e) => {
 };
 //Aña
 pescado.addEventListener('click', id_pescado);
-
-//Crear estructura de los productos
+}
