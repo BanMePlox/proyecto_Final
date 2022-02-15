@@ -67,12 +67,19 @@
         let div = document.createElement('div');
         div.classList.add('producto__texto');
         let a = document.createElement('a');
-        let p = document.createElement('p');
-        p.textContent = producto.name;
-
+        let imagenPro = document.createElement('img');
+        imagenPro.classList.add('imagen__producto');
+        let pNom = document.createElement('p');
+        let pPre = document.createElement('p');
+        pNom.classList.add('nom__pro');
+        imagenPro.alt="Foto producto";
+        pNom.textContent = producto.name;
+        pPre.textContent = producto.price;
+        divExterior.append(imagenPro);
         divExterior.append(a);
         a.append(div);
-        div.append(p);
+        div.append(pNom);
+        div.append(pPre);
         let divBoton= document.createElement('div');
         divBoton.classList.add('boton');
         divExterior.append(divBoton);
