@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('body')
+@csrf
 <form id="formElem_anyadir">
     <input type="text" name="name" value="Nombre del producto">
     <input type="text" name="description" value="Descripcion">
