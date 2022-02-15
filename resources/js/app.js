@@ -26,69 +26,69 @@ const validate = (e) => {
         //Estilo para los errores
 
         //Validacion del username
-        if (form.username.value.length === 0) {
-            div.textContent = 'El Username esta vacio';
-            formulario.prepend(div);
-            //Mostrara los errores por x tiempo.
-            setTimeout(() => div.remove(), 2000);
+    //     if (form.username.value.length === 0) {
+    //         div.textContent = 'El Username esta vacio';
+    //         formulario.prepend(div);
+    //         //Mostrara los errores por x tiempo.
+    //         setTimeout(() => div.remove(), 2000);
 
-        } else {
-            if (form.username.value.length <= 4) {
-                div.textContent = 'El Username debe tener mas de 4 caracteres';
-                formulario.prepend(div);
-                setTimeout(() => div.remove(), 2000);
-            }
-        }
-        if (form.nif.value.length != 9) {
-            div.textContent = 'El nif no es correcto';
-            formulario.prepend(div);
-            setTimeout(() => div.remove(), 2000);
-        } else {
-            for (let i = 0; i < form.nif.value.length; i++) {
-                if (i <= 7) {
-                    if (form.nif.value[i].isNaN() === true) {
-                        continue;
-                    } else {
-                        div.textContent = 'El nif no esta en el formato correcto';
-                        formulario.prepend(div);
-                        setTimeout(() => div.remove(), 2000);
+    //     } else {
+    //         if (form.username.value.length <= 4) {
+    //             div.textContent = 'El Username debe tener mas de 4 caracteres';
+    //             formulario.prepend(div);
+    //             setTimeout(() => div.remove(), 2000);
+    //         }
+    //     }
+    //     if (form.nif.value.length != 9) {
+    //         div.textContent = 'El nif no es correcto';
+    //         formulario.prepend(div);
+    //         setTimeout(() => div.remove(), 2000);
+    //     } else {
+    //         for (let i = 0; i < form.nif.value.length; i++) {
+    //             if (i <= 7) {
+    //                 if (form.nif.value[i].isNaN() === true) {
+    //                     continue;
+    //                 } else {
+    //                     div.textContent = 'El nif no esta en el formato correcto';
+    //                     formulario.prepend(div);
+    //                     setTimeout(() => div.remove(), 2000);
 
-                    }
-                } else {
-                    if (form.nif.value[i].isNaN() === false) {
-                        continue;
-                    } else {
-                        div.textContent = 'El nif no esta en el formato correcto';
-                        formulario.prepend(div);
-                        setTimeout(() => div.remove(), 2000);
+    //                 }
+    //             } else {
+    //                 if (form.nif.value[i].isNaN() === false) {
+    //                     continue;
+    //                 } else {
+    //                     div.textContent = 'El nif no esta en el formato correcto';
+    //                     formulario.prepend(div);
+    //                     setTimeout(() => div.remove(), 2000);
 
-                    }
-                }
-            }
+    //                 }
+    //             }
+    //         }
 
-        }
-        if (form.name.value.length === 0) {
-            div.textContent = 'El nombre esta vacio';
-            formulario.prepend(div);
-            setTimeout(() => div.remove(), 2000);
-        }
-        if (form.email.value.length === 0) {
-            div.textContent = 'El email esta vacio';
-            formulario.prepend(div);
-            setTimeout(() => div.remove(), 2000);
-        }
-        if (form.password.value.length === 0) {
-            div.textContent = 'La conttraseña esta vacia';
-            formulario.prepend(div);
-            setTimeout(() => div.remove(), 2000);
-        }
-        if (form.password_confirm.value.length === 0) {
-            div.textContent = 'La contraseña esta vacia';
-            formulario.prepend(div);
-            setTimeout(() => div.remove(), 2000);
-        }
-        return true;
-    }
+    //     }
+    //     if (form.name.value.length === 0) {
+    //         div.textContent = 'El nombre esta vacio';
+    //         formulario.prepend(div);
+    //         setTimeout(() => div.remove(), 2000);
+    //     }
+    //     if (form.email.value.length === 0) {
+    //         div.textContent = 'El email esta vacio';
+    //         formulario.prepend(div);
+    //         setTimeout(() => div.remove(), 2000);
+    //     }
+    //     if (form.password.value.length === 0) {
+    //         div.textContent = 'La conttraseña esta vacia';
+    //         formulario.prepend(div);
+    //         setTimeout(() => div.remove(), 2000);
+    //     }
+    //     if (form.password_confirm.value.length === 0) {
+    //         div.textContent = 'La contraseña esta vacia';
+    //         formulario.prepend(div);
+    //         setTimeout(() => div.remove(), 2000);
+    //     }
+    //     return true;
+    // }
     //Evento del boton
 btnEnviar.addEventListener('click', validate);
 
@@ -146,4 +146,4 @@ boton_anyadir.addEventListener('click',
 
         let result = await response.json();
     }
-);
+)};

@@ -5518,170 +5518,146 @@ var validate = function validate(e) {
   e.preventDefault();
   var form = document.forms[0]; //Estilo para los errores
   //Validacion del username
+  //     if (form.username.value.length === 0) {
+  //         div.textContent = 'El Username esta vacio';
+  //         formulario.prepend(div);
+  //         //Mostrara los errores por x tiempo.
+  //         setTimeout(() => div.remove(), 2000);
+  //     } else {
+  //         if (form.username.value.length <= 4) {
+  //             div.textContent = 'El Username debe tener mas de 4 caracteres';
+  //             formulario.prepend(div);
+  //             setTimeout(() => div.remove(), 2000);
+  //         }
+  //     }
+  //     if (form.nif.value.length != 9) {
+  //         div.textContent = 'El nif no es correcto';
+  //         formulario.prepend(div);
+  //         setTimeout(() => div.remove(), 2000);
+  //     } else {
+  //         for (let i = 0; i < form.nif.value.length; i++) {
+  //             if (i <= 7) {
+  //                 if (form.nif.value[i].isNaN() === true) {
+  //                     continue;
+  //                 } else {
+  //                     div.textContent = 'El nif no esta en el formato correcto';
+  //                     formulario.prepend(div);
+  //                     setTimeout(() => div.remove(), 2000);
+  //                 }
+  //             } else {
+  //                 if (form.nif.value[i].isNaN() === false) {
+  //                     continue;
+  //                 } else {
+  //                     div.textContent = 'El nif no esta en el formato correcto';
+  //                     formulario.prepend(div);
+  //                     setTimeout(() => div.remove(), 2000);
+  //                 }
+  //             }
+  //         }
+  //     }
+  //     if (form.name.value.length === 0) {
+  //         div.textContent = 'El nombre esta vacio';
+  //         formulario.prepend(div);
+  //         setTimeout(() => div.remove(), 2000);
+  //     }
+  //     if (form.email.value.length === 0) {
+  //         div.textContent = 'El email esta vacio';
+  //         formulario.prepend(div);
+  //         setTimeout(() => div.remove(), 2000);
+  //     }
+  //     if (form.password.value.length === 0) {
+  //         div.textContent = 'La conttraseña esta vacia';
+  //         formulario.prepend(div);
+  //         setTimeout(() => div.remove(), 2000);
+  //     }
+  //     if (form.password_confirm.value.length === 0) {
+  //         div.textContent = 'La contraseña esta vacia';
+  //         formulario.prepend(div);
+  //         setTimeout(() => div.remove(), 2000);
+  //     }
+  //     return true;
+  // }
+  //Evento del boton
 
-  if (form.username.value.length === 0) {
-    div.textContent = 'El Username esta vacio';
-    formulario.prepend(div); //Mostrara los errores por x tiempo.
+  btnEnviar.addEventListener('click', validate); //Añadir al carrito
 
-    setTimeout(function () {
-      return div.remove();
-    }, 2000);
-  } else {
-    if (form.username.value.length <= 4) {
-      div.textContent = 'El Username debe tener mas de 4 caracteres';
-      formulario.prepend(div);
-      setTimeout(function () {
-        return div.remove();
-      }, 2000);
-    }
-  }
+  var listaCarrito = {};
+  /*function agregarProductoCarrito(idProducto,
+      unidades,
+      precio) {
+      this.idProducto = idProducto;
+      this.unidades = unidades;
+      this.precio = precio;
+  
+      listaCarrito = { IdProducto: this.idProducto, unidades: this.unidades, precio: this.precio };
+  }*/
+  //El administrados gestiona productos.
 
-  if (form.nif.value.length != 9) {
-    div.textContent = 'El nif no es correcto';
-    formulario.prepend(div);
-    setTimeout(function () {
-      return div.remove();
-    }, 2000);
-  } else {
-    for (var i = 0; i < form.nif.value.length; i++) {
-      if (i <= 7) {
-        if (form.nif.value[i].isNaN() === true) {
-          continue;
-        } else {
-          div.textContent = 'El nif no esta en el formato correcto';
-          formulario.prepend(div);
-          setTimeout(function () {
-            return div.remove();
-          }, 2000);
-        }
-      } else {
-        if (form.nif.value[i].isNaN() === false) {
-          continue;
-        } else {
-          div.textContent = 'El nif no esta en el formato correcto';
-          formulario.prepend(div);
-          setTimeout(function () {
-            return div.remove();
-          }, 2000);
-        }
-      }
-    }
-  }
+  /*formElem.onsubmit = async(e) => {
+      e.preventDefault();
+  
+      let response = await fetch('api/productos', {
+          method: 'POST',
+          body: new FormData(formElem)
+      });
+  
+      let result = await response.json();
+  };*/
+  //Añadir productos
 
-  if (form.name.value.length === 0) {
-    div.textContent = 'El nombre esta vacio';
-    formulario.prepend(div);
-    setTimeout(function () {
-      return div.remove();
-    }, 2000);
-  }
-
-  if (form.email.value.length === 0) {
-    div.textContent = 'El email esta vacio';
-    formulario.prepend(div);
-    setTimeout(function () {
-      return div.remove();
-    }, 2000);
-  }
-
-  if (form.password.value.length === 0) {
-    div.textContent = 'La conttraseña esta vacia';
-    formulario.prepend(div);
-    setTimeout(function () {
-      return div.remove();
-    }, 2000);
-  }
-
-  if (form.password_confirm.value.length === 0) {
-    div.textContent = 'La contraseña esta vacia';
-    formulario.prepend(div);
-    setTimeout(function () {
-      return div.remove();
-    }, 2000);
-  }
-
-  return true;
-}; //Evento del boton
-
-
-btnEnviar.addEventListener('click', validate); //Añadir al carrito
-
-var listaCarrito = {};
-/*function agregarProductoCarrito(idProducto,
-    unidades,
-    precio) {
-    this.idProducto = idProducto;
-    this.unidades = unidades;
-    this.precio = precio;
-
-    listaCarrito = { IdProducto: this.idProducto, unidades: this.unidades, precio: this.precio };
-}*/
-//El administrados gestiona productos.
-
-/*formElem.onsubmit = async(e) => {
-    e.preventDefault();
-
-    let response = await fetch('api/productos', {
-        method: 'POST',
-        body: new FormData(formElem)
-    });
-
-    let result = await response.json();
-};*/
-//Añadir productos
-
-/*const formElem = document.querySelector('#formElem_anyadir');
-const boton_anyadir = document.querySelector('#boton_anyadir');
-
-boton_anyadir.addEventListener('click',
-    formElem.onsubmit = async(e) => {
-        e.preventDefault();
-
-        let response = await fetch('api/productos', {
-            method: 'POST',
-            body: new FormData(formElem)
-        });
-
-        let result = await response.json();
-    }
-);*/
-
-var formElem = document.querySelector('#formElem_anyadir');
-var boton_anyadir = document.querySelector('#boton_anyadir');
-boton_anyadir.addEventListener('click', formElem.onsubmit = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
-    var response, result;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            e.preventDefault();
-            _context.next = 3;
-            return fetch('api/productos', {
+  /*const formElem = document.querySelector('#formElem_anyadir');
+  const boton_anyadir = document.querySelector('#boton_anyadir');
+  
+  boton_anyadir.addEventListener('click',
+      formElem.onsubmit = async(e) => {
+          e.preventDefault();
+  
+          let response = await fetch('api/productos', {
               method: 'POST',
               body: new FormData(formElem)
-            });
-
-          case 3:
-            response = _context.sent;
-            _context.next = 6;
-            return response.json();
-
-          case 6:
-            result = _context.sent;
-
-          case 7:
-          case "end":
-            return _context.stop();
-        }
+          });
+  
+          let result = await response.json();
       }
-    }, _callee);
-  }));
+  );*/
 
-  return function (_x) {
-    return _ref.apply(this, arguments);
-  };
-}());
+  var formElem = document.querySelector('#formElem_anyadir');
+  var boton_anyadir = document.querySelector('#boton_anyadir');
+  boton_anyadir.addEventListener('click', formElem.onsubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
+      var response, result;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              _context.next = 3;
+              return fetch('api/productos', {
+                method: 'POST',
+                body: new FormData(formElem)
+              });
+
+            case 3:
+              response = _context.sent;
+              _context.next = 6;
+              return response.json();
+
+            case 6:
+              result = _context.sent;
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+};
 
 /***/ }),
 
