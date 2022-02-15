@@ -106,7 +106,9 @@ let listaCarrito = {};
 }*/
 
 //El administrados gestiona productos.
-/*formElem.onsubmit = async(e) => {
+
+const formElem = document.querySelector('#formElem_anyadir');
+formElem.onsubmit = async(e) => {
     e.preventDefault();
 
     let response = await fetch('api/productos', {
@@ -115,10 +117,9 @@ let listaCarrito = {};
     });
 
     let result = await response.json();
-};*/
+};
 //Añadir productos
-/*const formElem = document.querySelector('#formElem_anyadir');
-const boton_anyadir = document.querySelector('#boton_anyadir');
+/*const boton_anyadir = document.querySelector('#boton_anyadir');
 
 boton_anyadir.addEventListener('click',
     formElem.onsubmit = async(e) => {
@@ -131,7 +132,7 @@ boton_anyadir.addEventListener('click',
 
         let result = await response.json();
     }
-);*/
+); * /
 const formElem = document.querySelector('#formElem_anyadir');
 const boton_anyadir = document.querySelector('#boton_anyadir');
 boton_anyadir.addEventListener('click',
@@ -146,4 +147,27 @@ boton_anyadir.addEventListener('click',
 
         let result = await response.json();
     }
-);
+);*/
+
+
+
+
+
+//Recpoge el click en Categorias
+const pescado = document.querySelector('#Pescado');
+const carne = document.querySelector('#Carne');
+
+async function id_pescado() {
+
+};
+pescado.onsubmit = async(e) => {
+    e.preventDefault();
+    let id = 2;
+    let response = await fetch('api/products/' + id);
+    let products = await response.json();
+    console.log(products);
+};
+//Aña
+pescado.addEventListener('click', id_pescado);
+
+//Crear estructura de los productos

@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('body')
+@csrf
 <form id="formElem_anyadir">
     <input type="text" name="name" value="Nombre del producto">
     <input type="text" name="description" value="Descripcion">
@@ -15,4 +16,6 @@
     <input type="number" class="form-control" name="stock" required value="1" >
     <button type="submit" id="boton_anyadir" value="Añadir">Añadir</button>
   </form>
+
+
 @endsection
