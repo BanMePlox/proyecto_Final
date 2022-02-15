@@ -95,7 +95,7 @@ btnEnviar.addEventListener('click', validate);
 //Añadir al carrito
 let listaCarrito = {};
 
-function agregarProductoCarrito(idProducto,
+/*function agregarProductoCarrito(idProducto,
     unidades,
     precio) {
     this.idProducto = idProducto;
@@ -103,4 +103,47 @@ function agregarProductoCarrito(idProducto,
     this.precio = precio;
 
     listaCarrito = { IdProducto: this.idProducto, unidades: this.unidades, precio: this.precio };
-}
+}*/
+
+//El administrados gestiona productos.
+/*formElem.onsubmit = async(e) => {
+    e.preventDefault();
+
+    let response = await fetch('api/productos', {
+        method: 'POST',
+        body: new FormData(formElem)
+    });
+
+    let result = await response.json();
+};*/
+//Añadir productos
+/*const formElem = document.querySelector('#formElem_anyadir');
+const boton_anyadir = document.querySelector('#boton_anyadir');
+
+boton_anyadir.addEventListener('click',
+    formElem.onsubmit = async(e) => {
+        e.preventDefault();
+
+        let response = await fetch('api/productos', {
+            method: 'POST',
+            body: new FormData(formElem)
+        });
+
+        let result = await response.json();
+    }
+);*/
+const formElem = document.querySelector('#formElem_anyadir');
+const boton_anyadir = document.querySelector('#boton_anyadir');
+boton_anyadir.addEventListener('click',
+
+    formElem.onsubmit = async(e) => {
+        e.preventDefault();
+
+        let response = await fetch('api/productos', {
+            method: 'POST',
+            body: new FormData(formElem)
+        });
+
+        let result = await response.json();
+    }
+);

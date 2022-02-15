@@ -28,6 +28,13 @@ class AddProductsControladorApiController extends Controller
     {
         $product = new Product();
         $product->name = $request->get('name');
+        $product->price = $request->get('price');
+        $product->description = $request->get('description');
+        $product->stock = $request->get('stock');
+        $product->file_path = $request->get('file_path');
+        $product->impuesto = $request->get('impuesto');
+        $product->descuento = $request->get('descuento');
+        $product->category_id = $request->get('category_id');
         $product->save();
         return response()->json($product,201);
     }

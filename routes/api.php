@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AddProductsControladorApiController;
 use App\Http\Controllers\Api\ListProductApiController;
 use App\Http\Controllers\Api\CategoryApiController;
-
+use App\Http\Controllers\Api\CartApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +30,4 @@ Route::apiResource('/productos',AddProductsControladorApiController::class)->
 Route:: apiResource('/products',ListProductApiController::class);
 
 Route:: apiResource('/categories',CategoryApiController::class);
+Route:: apiResource('/cart',CartApiController::class);
