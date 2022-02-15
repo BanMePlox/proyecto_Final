@@ -101,12 +101,14 @@ async function actualizarCarrito() {
     })
 };
 async function anyadirCarrito(id) {
-        let producto = {amount:id};
+        let amount = {amount: id};
+
+        console.log(amount);
         let response = await fetch('api/cart', {
         method: 'POST',
-        body: JSON.stringify(producto),
+        body: JSON.stringify(amount),
       });
-      respuesta = await response.json();
+      let respuesta = await response.json();
       const carro = document.querySelector('#cart');
     carro.textContent=carrito.lenght;
     }

@@ -8,13 +8,6 @@
             @forelse($products as $product)
             @if ($product->disponible = "1")
             <div class="producto">
-<<<<<<< HEAD
-                <img src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen productos">
-                <div class="producto__texto">
-                    <h3>{{$product->name}}</h3>
-                    <p>{{$product->price}}€</p>
-                    <a class="btn__producto" id="btn_carrito"href="#" click="agregarProductoCarrito({{$product->id}})">Añadir al carrito</a>
-=======
                 <a href="{{Route('products.show', $product->id)}}">
                     <img class="imagen__producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Productos">
                     <div class="producto__texto">
@@ -24,7 +17,6 @@
                 </a>
                 <div class="boton">
                     <a class="btn__producto" href="#">Añadir al carrito</a>
->>>>>>> 50a1f68ebe211a8ec99d791881673eb7265c3bf1
                 </div>
             </div>
             @endif
