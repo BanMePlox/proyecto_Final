@@ -27,6 +27,7 @@
                 @else
                     @if (Auth::user()->admin == 1)
                         <li><a href="{{route('indexadmin')}}">Administración</a></li>
+                        <li><a href="{{route('profile.show')}}">Gestión de usuario</a></li>
                     @endif
                     @if (Auth::user()->admin == 0)
                         <li><a href="{{route('profile.show')}}">Gestión de usuario</a></li>
