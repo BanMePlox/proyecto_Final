@@ -56,7 +56,6 @@
     const section = document.createElement('section');
     section.classList.add('mas__vendidos');
     crearArticle.append(section);
-
     //Recorre el bucle de productos.
     products.forEach((producto) => {
         //Crea el primer div que es el contenedor.
