@@ -17,9 +17,7 @@ class CategoryApiController extends Controller
     public function index()
     {
 
-        $sql = 'SELECT id, name FROM categories';
-        $categories = DB::select($sql);
-        return response()->json($categories,200);
+
     }
 
     /**
@@ -41,7 +39,8 @@ class CategoryApiController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $products=Product::where('category_id', $category)->get();
+        return response()->json($products,200);
     }
 
     /**

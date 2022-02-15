@@ -16,4 +16,6 @@
     <input type="number" class="form-control" name="stock" required value="1" >
     <button type="submit" id="boton_anyadir" value="Añadir">Añadir</button>
   </form>
+
+
 @endsection

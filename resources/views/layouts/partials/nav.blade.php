@@ -1,22 +1,3 @@
-<script>
-         /* async function f() {
-            let response = await fetch('api/categories', {
-        method: 'GET'
-      });
-
-      let result = await response.json();
-
-             let ul = document.querySelector('ul');
-
-for(let i=0; i<result.length; i++){
-    let li = document.createElement('li');
-    li.textContent = result[i].name;
-ul.append(li);
-}
-
-}
-f();*/
-</script>
 
 <header>
     <nav class="cabecera">
@@ -31,12 +12,9 @@ f();*/
                 <li><a href="#">Categorias ▼</a>
                     <ul id="desplegable">
                         <!--Generar lis dentro de este ul-->
-                        <li><a href="#">Pescado</a></li>
-                        <li><a href="#">Carne</a></li>
-                        <li><a href="#">Pescado</a></li>
-                        <li><a href="#">Carne</a></li>
-                        <li><a href="#">Pescado</a></li>
-                        <li><a href="#">Carne</a></li>
+                        <li><a href="#" onclick="elegirCategoria(id=1)">Pescaderia</a></li>
+                        <li><a href="#" onclick="elegirCategoria(id=2)">Carniceria</a></li>
+                        <li><a href="#" onclick="elegirCategoria(id=3)">Panaderia</a></li>
                     </ul>
                 </li>
                 @if(!Auth::check())
@@ -49,7 +27,6 @@ f();*/
                 @else
                     @if (Auth::user()->admin == 1)
                         <li><a href="{{route('indexadmin')}}">Administración</a></li>
-                        <p>{{Auth::user()->admin}}</p>
                     @endif
                     @if (Auth::user()->admin == 0)
                         <li><a href="{{route('profile')}}">Gestión de usuario</a></li>
@@ -63,3 +40,51 @@ f();*/
     </nav>
 </header>
 <hr>
+<script>
+   async function elegirCategoria(id) {
+    let response = await fetch('api/products/' + id);
+    let products = await response.json();
+    //Elimina los productos mostrados
+    const eliminarArticle= document.querySelector('article');
+    eliminarArticle.remove();
+    //Recoge el main
+    let main = document.querySelector('main');
+    //Crea un article y lo añane dentro del main.
+    let crearArticle = document.createElement('article');
+    main.append(crearArticle);
+    //Crea una seccion y la añade dentro del article
+    const section = document.createElement('section');
+    section.classList.add('mas__vendidos');
+    crearArticle.append(section);
+
+    //Recorre el bucle de productos.
+    products.forEach((producto) => {
+        //Crea el primer div que es el contenedor.
+    let divExterior = document.createElement('div');
+    divExterior.classList.add('producto');
+    section.append(divExterior);
+        //Crea el div donde van el titulo, la imagen, el precio.
+        let div = document.createElement('div');
+        div.classList.add('producto__texto');
+        let a = document.createElement('a');
+        let p = document.createElement('p');
+        p.textContent = producto.name;
+
+        divExterior.append(a);
+        a.append(div);
+        div.append(p);
+        let divBoton= document.createElement('div');
+        divBoton.classList.add('boton');
+        divExterior.append(divBoton);
+        const boton = document.createElement('button');
+        boton.classList.add('btn', 'btn-primary', 'btn__producto');
+        boton.textContent = "Añadir al carrito";
+        boton.addEventListener('click', function() {
+            carrito.push(producto.id);
+            actualizarCarrito();
+        });
+        divBoton.append(boton);
+    })
+};
+
+</script>

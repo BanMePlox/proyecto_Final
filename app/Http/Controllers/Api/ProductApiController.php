@@ -22,9 +22,10 @@ class ProductApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $id)
     {
-        //
+        $products=Product::where('category_id', $id)->get();
+        return response()->json($products,200);
     }
 
     /**
@@ -33,9 +34,9 @@ class ProductApiController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $id)
     {
-        //
+
     }
 
     /**
