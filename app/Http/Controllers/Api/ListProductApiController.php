@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 class ListProductApiController extends Controller
 {
@@ -15,6 +16,7 @@ class ListProductApiController extends Controller
      */
     public function index()
     {
+
         $sql = 'SELECT * FROM products';
         $products = DB::select($sql);
         return response()->json($products,200);
@@ -37,9 +39,12 @@ class ListProductApiController extends Controller
      * @param  \App\Models\ListProduct  $listProduct
      * @return \Illuminate\Http\Response
      */
-    public function show(ListProduct $listProduct)
+    public function show($id)
     {
-        //
+
+        $products=Product::where('category_id', $id)->get();
+        return response()->json($products,200);
+
     }
 
     /**
