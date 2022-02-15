@@ -9,6 +9,9 @@
 ul{
     list-style: none;
 }
+body{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
 button {
     background: none;
@@ -25,6 +28,10 @@ button {
     /* for input */
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 a {
@@ -114,7 +121,7 @@ a {
     margin-top: 20px;
 }
 .imagen__producto{
-    width: 200px;
+    width: 100%;
     height: 200px;
 }
 
@@ -138,8 +145,13 @@ a {
 }
 .producto__texto{
     padding-bottom: 20px;
-    text-align: left;
+    text-align: center;
     padding-left: 10px;
+}
+
+.nom__pro{
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .producto__texto p{

@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 
@@ -20,7 +21,7 @@ use App\Models\User;
 
 Route::get('/', function () {
     return redirect('/products');
-});
+})->name('welcome');
 
 Route::get('/test', function () {
     return view('test', );
@@ -39,22 +40,27 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //RUTAS DE ADMIN (NO HAY CONTROLADOR POR ESO HAY TANTAS PERDONADME)
 Route::get('admin/stock', function() {
     $products = Product::all();
-    return view('admin/stock', compact('products'));
-})->name('Stock');// ->middleware('admin');
+    $category = Category::all();
+    return view('admin/stock', compact('products', 'category'));
+})->name('Stock')->middleware('admin');
 
 Route::get('admin/products', function() {
     $products = Product::all();
     return view('admin/products', compact('products'));
-})->name('Productos');// ->middleware('admin');
+})->name('Productos')->middleware('admin');
 
 Route::get('admin/users', function() {
     $users = User::all();
     return view('admin/users', compact('users'));
-})->name('Usuarios');// ->middleware('admin');
+})->name('Usuarios')->middleware('admin');
 
 Route::get('admin/index', function() {
-    return view('admin/index');
-});// ->middleware('admin');
+    $users = User::all();
+    if ($users->admin->NULL) {
+        return redirect('welcome');
+    }
+    return view('admin/index', compact('users'));
+})->middleware('admin');
 
 
 //RECURSOS

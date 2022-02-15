@@ -19,11 +19,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->admin(null)) {
-            return redirect('welcome');
+        if ($request->user()->admin == '0') {
+            return redirect('/');
         }
-        if (!$request->user()->admin('1')) {
-            return redirect('welcome');
+        if (!$request->user()->admin == '1') {
+            return redirect('/');
         }
 
 
