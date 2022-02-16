@@ -1,66 +1,87 @@
-@extends('layouts.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock</title>
+    <script src="Adminjs.js" defer></script>
+    <link rel="stylesheet" href="{{URL::asset('css/stock.css')}}">
 
-@section('body')
-<main>
+</head>
+<body>
+    <header class="cabecera">
+        <a href="{{route('products.index')}}"><img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo"></a>
+        <p>Gestion de Stock</p>
+    </header>
+    <main class="cuerpo">
+        <h2>Bienvenido</h2>
+        <p>En esta sección podra llevar a cabo las tareas de Stock</p>
+        <button onclick="mostrarOcultar1()">Mostrar mas vendidos</button>
+        <button onclick="mostrarOcultar2()">Mostrar menos vendidos</button>
+        <button onclick="mostrarOcultar3()">Pedidos Usuario</button>
+        <button onclick="mostrarOcultar4()">Stock</button>
 
-    <button onclick="">STOCK</button>
-    <button onclick="">STOCK</button>
-    <button onclick="">STOCK</button>
-    <button onclick="">PEDIDOS DE USUARIO</button>
+        <div class="contenedor">
+            <div id="MasVendidos">
+                <p>Prueba de que va</p>
+            </div>
+            <div id="MenosVendidos">
+                <p>Prueba de que va menos vendidos</p>
+            </div>
+            <div id="PedidosUsu">
+                <p>PedidosUsu</p>
+            </div>
+            <div id="Stock">
+                <p>Stock</p>
+            </div>
 
-<article>
-<h1>STOCK BAJO</h1>
-<section class="mas__vendidos">
-@forelse ($products as $product)
-    @if ($product->stock < '5')
-        <div class="producto">
-            <a href="{{Route('products.show', $product->id)}}">
-                <img class="imagen__producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Productos">
-                <div class="producto__texto">
-                    <p>{{$product->name}}</p>
-                    <p>{{$product->price}}€</p>
-                </div>
-            </a>
         </div>
-    </section>
-    @endif
-@empty
-No hay productos sin stock
-@endforelse
-
-{{-- FINAL DEL STOCK --}}
+    </main>
+</body>
+</html>
 
 
+<script>
+    let y = document.querySelectorAll(".contenedor > div");
+console.log(y);
+for(let i of y){
+    i.style.display="none";
+}
 
-{{-- INICIO PRODUCTOS MÁS VENDIDOS ¿POR CATEGORIA? --}}
+function mostrarOcultar1() {
+    let x = document.querySelector("#MasVendidos");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
-<div class="form-group">
-    Categoria
-    <select name="category_id" id="category_id" default="1">
-    @foreach ($category as $categoria)
-        <option value="{{$categoria->id}}">{{$categoria->name}}</option>
-    @endforeach
-</select>
-</div>
+function mostrarOcultar2() {
+    let x = document.getElementById("MenosVendidos");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
-{{-- FINAL PRODUCTOS MÁS VENDIDOS --}}
+function mostrarOcultar3() {
+    let x = document.getElementById("PedidosUsu");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
-
-
-{{-- INICIO PRODUCTOS MENOS VENDIDOS ¿POR CATEGORIA? --}}
-
-{{-- FINAL PRODUCTOS MENOS VENDIDOS --}}
-
-
-
-{{-- INICIO REVISAR PEDIDOS --}}
-
-{{-- FINAL REVISAR PEDIDOS --}}
-
-
-
-</article>
-
-
-</main>
-@endsection
+function mostrarOcultar4() {
+    let x = document.getElementById("Stock");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>

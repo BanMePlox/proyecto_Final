@@ -1,0 +1,43 @@
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: auto;
+
+}
+.cabecera{
+    color: white;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.cabecera p{
+    font-size: 60px;
+    font-weight: 600;
+}
+
+
+.logo{
+    width: 300px;
+    height: 150px;
+}
+
+/** Pagina de Stock**/
+
+.cuerpo{
+    text-align: center;
+}
+.cuerpo > h2{
+    font-size: 45px;
+}
+.cuerpo > button{
+border: none;
+background-color: green;
+border-radius: 56px;
+padding: 10px 20px;
+font-weight: 600;
+}
+
+.cuerpo > button:hover{
+    cursor: pointer;
+    color: wheat;
+}
