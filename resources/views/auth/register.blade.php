@@ -72,7 +72,6 @@
     </x-jet-authentication-card>
 </x-guest-layout>
 <script>
-
 const btnEnviar = document.querySelector('#btn-enviar');
 const form = document.querySelector('#formulario');
 let div = document.createElement('div');
@@ -94,7 +93,6 @@ function validarEmail(email) {
 
 async function comprobarFormulario(e) {
     let ready = false;
-
     if (form.name.value != "" && form.username.value != "" && form.nif.value != "" && form.email.value != "" && form.password.value != "" && form.password_confirmation.value != "") {
         ready = true;
     } else {
@@ -102,7 +100,7 @@ async function comprobarFormulario(e) {
         form.prepend(div);
         div.textContent = "Revise los campos, algunos estan vacios";
         setTimeout(() => div.remove(), 3000);
-        e.preventDefault();
+
     }
 
     if (ready) {
@@ -122,10 +120,8 @@ async function comprobarFormulario(e) {
                 form.prepend(div);
                 div.textContent = 'NIF erroneo, la letra no se corresponde';
                 setTimeout(() => div.remove(), 3000);
-                e.preventDefault();
             } else {
                 ready = true;
-                e.preventDefault();
             }
 
         } else {
@@ -133,7 +129,6 @@ async function comprobarFormulario(e) {
             form.prepend(div);
             div.textContent = 'NIF erroneo, formato no válido';
             setTimeout(() => div.remove(), 3000);
-            e.preventDefault();
         }
     }
 
@@ -147,14 +142,12 @@ async function comprobarFormulario(e) {
                 div.textContent = "El password y la confirmacion no coinciden";
                 setTimeout(() => div.remove(), 3000);
                 form.password.focus();
-                e.preventDefault();
             }
         } else {
             form.prepend(div);
             div.textContent = "El email no tiene un formato valido!";
             setTimeout(() => div.remove(), 3000);
             form.email.focus();
-            e.preventDefault();
         }
     }
 

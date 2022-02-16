@@ -27,26 +27,29 @@ class AddProductsControladorApiController extends Controller
     public function store(Request $request)
     {
 
-        $product = new Product();
-        $this->validate($request, [
-            'photo' => 'required|image'
-        ]);
+        if ($request->hasFile('file')) {
 
-        $file = $request->file('photo');
-        $extension = $file->getClientOriginalExtension();
-        $fileName = $extension;
-        $path = public_path('/public/imagenes/'.$fileName);
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png,webp'
+            ]);
 
-        $product->file_path = $path;
-        $product->name = $request->get('name');
-        $product->price = $request->get('price');
-        $product->description = $request->get('description');
-        $product->stock = $request->get('stock');
-        $product->impuesto = $request->get('impuesto');
-        $product->descuento = $request->get('descuento');
-        $product->category_id = $request->get('category_id');
-        $product->save();
-        return response()->json($product,201);
+            $request->file->storeAs('product', 'public');
+
+            $product = new Product([
+                "name" => $request->get('name'),
+                "description" => $request->get('description'),
+                "price" => $request->get('price'),
+                "impuesto" => $request->get('impuesto'),
+                "descuento" => $request->get('descuento'),
+                "stock" => $request->get('stock'),
+                "category_id" => $request->get('category_id'),
+                "file_path" =>$request->get('file_path'),
+            ]);
+            $product->save();
+        }
+
+        return response()->json('Hola',201);
+
     }
 
     /**

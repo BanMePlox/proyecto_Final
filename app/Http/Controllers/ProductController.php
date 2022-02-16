@@ -64,6 +64,9 @@ class ProductController extends Controller
                 $product->save();
             }
 
+        return response()->json('adios',201);
+
+
 }
 
     /**

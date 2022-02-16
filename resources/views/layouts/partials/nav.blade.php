@@ -123,10 +123,6 @@ async function mostrarMasProductos() {
         let div = document.createElement('div');
         div.classList.add('producto__texto');
         let a = document.createElement('a');
-<<<<<<< HEAD
-        let p = document.createElement('p');
-        p.textContent = producto.name;
-=======
         let imagenPro = document.createElement('img');
         imagenPro.classList.add('imagen__producto');
         let pNom = document.createElement('p');
@@ -136,7 +132,6 @@ async function mostrarMasProductos() {
         pNom.textContent = producto.name;
         pPre.textContent = producto.price+"€";
         divExterior.append(imagenPro);
->>>>>>> 0743f549f1a3ce15e205dd17b9690734fde389ec
         divExterior.append(a);
         a.append(div);
         div.append(pNom);
@@ -177,7 +172,6 @@ async function actualizarCarrito() {
         }
     })
 };
-<<<<<<< HEAD
 async function anyadirCarrito(id) {
         let amount = {amount: id};
 
@@ -191,6 +185,4 @@ async function anyadirCarrito(id) {
       productosCarrito++;
     carro.textContent=productosCarrito;
     }
-=======
->>>>>>> 0743f549f1a3ce15e205dd17b9690734fde389ec
 </script>
