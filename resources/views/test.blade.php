@@ -54,7 +54,7 @@
 </main>
 </body>
 <script>
-    let carrito = [];
+
     let result;
 async function estructura() {
   let response = await fetch('api/products', {
@@ -87,31 +87,6 @@ div.append(boton);
 
 
 }
-async function actualizarCarrito() {
-    let response = await fetch('api/products', { method: 'GET' });
-    let products = await response.json();
-
-    products.forEach((producto)=>{
-        for (let id of carrito){
-            if(producto.id === id) {
-                anyadirCarrito(producto.id);
-                break;
-            }
-        }
-    })
-};
-async function anyadirCarrito(id) {
-        let amount = {amount: id};
-
-        console.log(amount);
-        let response = await fetch('api/cart', {
-        method: 'POST',
-        body: JSON.stringify(amount),
-      });
-      let respuesta = await response.json();
-      const carro = document.querySelector('#cart');
-    carro.textContent=carrito.lenght;
-    }
 
 
 

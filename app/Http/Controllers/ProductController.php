@@ -59,7 +59,7 @@ class ProductController extends Controller
                     "descuento" => $request->get('descuento'),
                     "stock" => $request->get('stock'),
                     "category_id" => $request->get('category_id'),
-                    "file_path" =>
+                    "file_path" =>$request->get('file_path'),
                 ]);
                 $product->save();
             }

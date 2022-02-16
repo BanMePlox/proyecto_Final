@@ -71,3 +71,93 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+<script>
+
+const btnEnviar = document.querySelector('#btn-enviar');
+const form = document.querySelector('#formulario');
+let div = document.createElement('div');
+div.classList.add('error');
+let botonCSS = {
+    width: '100%',
+    height: '20%',
+    backgroundColor: '#ffd1d1',
+    color: 'black',
+    border: '1px solid red',
+    marginBottom: '5px',
+}
+Object.assign(div.style, botonCSS);
+
+function validarEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
+async function comprobarFormulario(e) {
+    let ready = false;
+
+    if (form.name.value != "" && form.username.value != "" && form.nif.value != "" && form.email.value != "" && form.password.value != "" && form.password_confirmation.value != "") {
+        ready = true;
+    } else {
+        ready = false;
+        form.prepend(div);
+        div.textContent = "Revise los campos, algunos estan vacios";
+        setTimeout(() => div.remove(), 3000);
+        e.preventDefault();
+    }
+
+    if (ready) {
+        var numero,
+            letraDelDNI, letraParaComprobar;
+        var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+        dni = form.nif.value.toUpperCase();
+
+        if (expresion_regular_dni.test(dni) === true) {
+            numero = dni.substr(0, dni.length - 1);
+            letraDelDNI = dni.substr(dni.length - 1, 1);
+            numero = numero % 23;
+            letraParaComprobar = 'TRWAGMYFPDXBNJZSQVHLCKET';
+            letraParaComprobar = letraParaComprobar.substring(numero, numero + 1);
+            if (letraParaComprobar != letraDelDNI) {
+                ready = false;
+                form.prepend(div);
+                div.textContent = 'NIF erroneo, la letra no se corresponde';
+                setTimeout(() => div.remove(), 3000);
+                e.preventDefault();
+            } else {
+                ready = true;
+                e.preventDefault();
+            }
+
+        } else {
+            ready = false;
+            form.prepend(div);
+            div.textContent = 'NIF erroneo, formato no válido';
+            setTimeout(() => div.remove(), 3000);
+            e.preventDefault();
+        }
+    }
+
+    if (ready) {
+        if (validarEmail(form.email.value)) {
+            if (form.password.value == form.password_confirmation.value) {
+                ready = true;
+            } else {
+                ready = false;
+                form.prepend(div);
+                div.textContent = "El password y la confirmacion no coinciden";
+                setTimeout(() => div.remove(), 3000);
+                form.password.focus();
+                e.preventDefault();
+            }
+        } else {
+            form.prepend(div);
+            div.textContent = "El email no tiene un formato valido!";
+            setTimeout(() => div.remove(), 3000);
+            form.email.focus();
+            e.preventDefault();
+        }
+    }
+
+}
+btnEnviar.addEventListener("click", comprobarFormulario);
+</script>
