@@ -16,7 +16,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('welcome', compact('products'));
+        $categorias = Category::all();
+        return view('welcome', compact('products', 'categorias'));
     }
 //Cuando acabéis esto tiene que ir a products.create otra vez
 
@@ -40,11 +41,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        {
-            $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-            ]);
+
 
             if ($request->hasFile('file')) {
 
@@ -62,11 +59,11 @@ class ProductController extends Controller
                     "descuento" => $request->get('descuento'),
                     "stock" => $request->get('stock'),
                     "category_id" => $request->get('category_id'),
-                    "file_path" => $request->file->hashName()
+                    "file_path" =>
                 ]);
                 $product->save();
             }
-    }
+
 }
 
     /**

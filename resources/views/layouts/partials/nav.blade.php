@@ -17,12 +17,24 @@
                         <li><a href="#" onclick="elegirCategoria(id=3)">Panaderia</a></li>
                     </ul>
                 </li>
+                @if(!Auth::check())
                 <li><a href="#">Identificate ▼</a>
                     <ul id="desplegable">
                         <li><a href="{{route('login')}}">Login</a></li>
                         <li><a href="{{route('register')}}">Registrate</a></li>
                     </ul>
                 </li>
+                @else
+                    @if (Auth::user()->admin == 1)
+                        <li><a href="{{route('indexadmin')}}">Administración</a></li>
+                    @endif
+                    @if (Auth::user()->admin == 0)
+                        <li><a href="{{route('profile')}}">Gestión de usuario</a></li>
+                    @endif
+
+
+                @endif
+
                 <li><button href="#" id="cart"><img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito" id="carro"></button></li>
             </ul>
     </nav>
@@ -44,17 +56,25 @@
     const section = document.createElement('section');
     section.classList.add('mas__vendidos');
     crearArticle.append(section);
-    //Crea el primer div que es el contenedor.
-    let div2 = document.createElement('div');
-    div2.classList.add('producto');
-    section.append(div2);
     //Recorre el bucle de productos.
     products.forEach((producto) => {
+        //Crea el primer div que es el contenedor.
+    let divExterior = document.createElement('div');
+    divExterior.classList.add('producto');
+    section.append(divExterior);
         //Crea el div donde van el titulo, la imagen, el precio.
         let div = document.createElement('div');
         div.classList.add('producto__texto');
-        let h3 = document.createElement('h3');
-        h3.textContent = producto.name;
+        let a = document.createElement('a');
+        let p = document.createElement('p');
+        p.textContent = producto.name;
+
+        divExterior.append(a);
+        a.append(div);
+        div.append(p);
+        let divBoton= document.createElement('div');
+        divBoton.classList.add('boton');
+        divExterior.append(divBoton);
         const boton = document.createElement('button');
         boton.classList.add('btn', 'btn-primary', 'btn__producto');
         boton.textContent = "Añadir al carrito";
@@ -62,9 +82,7 @@
             carrito.push(producto.id);
             actualizarCarrito();
         });
-        div2.append(div);
-        div.append(h3);
-        div.append(boton);
+        divBoton.append(boton);
     })
 };
 
