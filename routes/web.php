@@ -41,7 +41,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('admin/stock', function() {
     $products = Product::all();
     $category = Category::all();
-    return view('admin/stock', compact('products', 'category'));
+    $productdesc = Product::select("*")->orderBy("sold")->get();
+    return view('admin/stock', compact('products', 'category', 'productdesc'));
 })->name('Stock')->middleware('admin');
 
 Route::get('admin/products', function() {

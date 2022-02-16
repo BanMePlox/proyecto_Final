@@ -24,16 +24,44 @@
 
         <div class="contenedor">
             <div id="MasVendidos">
-                <p>Prueba de que va</p>
+                <p>
+                    @php
+                        $contadorventas = 0;
+                    @endphp
+                    @forelse ($productdesc as $productdescs)
+
+                        <div class="producto__texto">
+                            <a href="{{Route('products.show', $productdescs->id)}}">{{$productdescs->name}}
+                            </div>
+                            @php
+                                $contadorventas++;
+                            @endphp
+                    @empty
+                        No hay productos bien vendidos
+                    @endforelse
+
+                </p>
             </div>
+
+
             <div id="MenosVendidos">
                 <p>Prueba de que va menos vendidos</p>
             </div>
+
+
             <div id="PedidosUsu">
                 <p>PedidosUsu</p>
             </div>
+
+
             <div id="Stock">
-                <p>Stock</p>
+                @forelse ($products as $product)
+                    @if ($product->stock < 15)
+                    <a href="{{Route('products.show', $product->id)}}">{{$product->name}} <br>
+                    @endif
+                @empty
+
+                @endforelse
             </div>
 
         </div>
