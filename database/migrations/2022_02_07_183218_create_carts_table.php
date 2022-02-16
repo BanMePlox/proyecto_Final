@@ -17,7 +17,6 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->integer('amount')->nullable();
             $table->foreignId('product_id')->constrained();
-            $table->foreignId('user_id')->constrained();
             $table->decimal('total_price')->nullable();
             $table->date('order_date')->nullable();
             $table->timestamps();

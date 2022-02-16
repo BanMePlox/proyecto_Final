@@ -26,12 +26,22 @@ class AddProductsControladorApiController extends Controller
      */
     public function store(Request $request)
     {
+
         $product = new Product();
+        $this->validate($request, [
+            'photo' => 'required|image'
+        ]);
+
+        $file = $request->file('photo');
+        $extension = $file->getClientOriginalExtension();
+        $fileName = $extension;
+        $path = public_path('/public/imagenes/'.$fileName);
+
+        $product->file_path = $path;
         $product->name = $request->get('name');
         $product->price = $request->get('price');
         $product->description = $request->get('description');
         $product->stock = $request->get('stock');
-        $product->file_path = $request->get('file_path');
         $product->impuesto = $request->get('impuesto');
         $product->descuento = $request->get('descuento');
         $product->category_id = $request->get('category_id');
@@ -45,9 +55,11 @@ class AddProductsControladorApiController extends Controller
      * @param  \App\Models\AddProducts  $addProducts
      * @return \Illuminate\Http\Response
      */
-    public function show(AddProducts $addProducts)
+    public function show($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return response()->json($product,201);
     }
 
     /**
@@ -57,10 +69,20 @@ class AddProductsControladorApiController extends Controller
      * @param  \App\Models\AddProducts  $addProducts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AddProducts $addProducts)
+    public function update(Request $request)
     {
-        //
-    }
+     $productoActualizado = Product::find($request);
+     $productoActualizado->name = $request->name;
+     $productoActualizado->price = $request->price;
+     $productoActualizado->description = $request->description;
+     $productoActualizado->stock = $request->stock;
+     $productoActualizado->file_path = $request->file_path;
+     $productoActualizado->impuesto = $request->impuesto;
+     $productoActualizado->descuento = $request->descuento;
+     $productoActualizado->category_id = $request->category_id;
+     $productoActualizado->save();
+     return response()->json($productoActualizado,201);
+ }
 
     /**
      * Remove the specified resource from storage.
@@ -68,8 +90,7 @@ class AddProductsControladorApiController extends Controller
      * @param  \App\Models\AddProducts  $addProducts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AddProducts $addProducts)
+    public function destroy($id)
     {
-        //
     }
 }

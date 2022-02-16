@@ -20,7 +20,7 @@
            <li><a href="#">Categorias ▼</a>
                <ul id="desplegable">
                    <!--Generar lis dentro de este ul-->
-                   <li><a href="#" >Pescado</a></li>
+                   <li><a href="#" id=>Pescado</a></li>
                    <li><a href="#" onclick="elegirCategoria(id=2)">Fruta</a></li>
            </li>
            <li><a href="#">Identificate ▼</a>
