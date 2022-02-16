@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('file_path')->nullable();
-            $table->decimal('price')->nullable();
+            $table->double('price')->nullable();
             $table->decimal('impuesto')->nullable();
             $table->decimal('descuento')->nullable();
             $table->integer('stock')->nullable();
