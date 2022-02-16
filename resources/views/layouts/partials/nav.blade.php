@@ -74,7 +74,7 @@
         pNom.classList.add('nom__pro');
         imagenPro.alt="Foto producto";
         pNom.textContent = producto.name;
-        pPre.textContent = producto.price;
+        pPre.textContent = producto.price+"€";
         divExterior.append(imagenPro);
         divExterior.append(a);
         a.append(div);
