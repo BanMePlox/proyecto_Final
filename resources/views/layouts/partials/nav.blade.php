@@ -38,7 +38,7 @@
 
                 <li>
                     <button href="#" id="cart">
-                    <img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito">
+                        <a href="{{route('carrito')}}"><img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito"></a>
                     <p id="carro"></p>
                     </button>
                 </li>
