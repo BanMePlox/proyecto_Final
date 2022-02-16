@@ -41,7 +41,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
+        $request->validate([
+            'name' => 'required',
+        ]);
 
             if ($request->hasFile('file')) {
 
@@ -59,12 +61,13 @@ class ProductController extends Controller
                     "descuento" => $request->get('descuento'),
                     "stock" => $request->get('stock'),
                     "category_id" => $request->get('category_id'),
-                    "file_path" =>$request->get('file_path'),
+                    //"file_path" => $request->file->hashname(), <- ASÍ FUNCIONA CON LARAVEL NO LO BORRÉIS POR SI ACASO
+                    "file_path" => $request->file->hashname(),
                 ]);
                 $product->save();
             }
 
-        return response()->json('adios',201);
+        return response()->json('Producto creado',201);
 
 
 }

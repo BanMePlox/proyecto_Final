@@ -31,8 +31,9 @@
 <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <input type="file" name="file">
+            <input type="file" name="file" required>
         </div>
+
     <div class="form-group">
         <label>Nombre</label>
         <input type="text" class="form-control" name="name" default="a" required value="Carne">
