@@ -27,9 +27,10 @@
                 @else
                     @if (Auth::user()->admin == 1)
                         <li><a href="{{route('indexadmin')}}">Administración</a></li>
+                        <li><a href="{{route('profile.show')}}">Gestión de usuario</a></li>
                     @endif
                     @if (Auth::user()->admin == 0)
-                        <li><a href="{{route('profile')}}">Gestión de usuario</a></li>
+                        <li><a href="{{route('profile.show')}}">Gestión de usuario</a></li>
                     @endif
 
 
@@ -122,11 +123,24 @@ async function mostrarMasProductos() {
         let div = document.createElement('div');
         div.classList.add('producto__texto');
         let a = document.createElement('a');
+<<<<<<< HEAD
         let p = document.createElement('p');
         p.textContent = producto.name;
+=======
+        let imagenPro = document.createElement('img');
+        imagenPro.classList.add('imagen__producto');
+        let pNom = document.createElement('p');
+        let pPre = document.createElement('p');
+        pNom.classList.add('nom__pro');
+        imagenPro.alt="Foto producto";
+        pNom.textContent = producto.name;
+        pPre.textContent = producto.price+"€";
+        divExterior.append(imagenPro);
+>>>>>>> 0743f549f1a3ce15e205dd17b9690734fde389ec
         divExterior.append(a);
         a.append(div);
-        div.append(p);
+        div.append(pNom);
+        div.append(pPre);
         let divBoton= document.createElement('div');
         divBoton.classList.add('boton');
         divExterior.append(divBoton);
@@ -163,6 +177,7 @@ async function actualizarCarrito() {
         }
     })
 };
+<<<<<<< HEAD
 async function anyadirCarrito(id) {
         let amount = {amount: id};
 
@@ -176,4 +191,6 @@ async function anyadirCarrito(id) {
       productosCarrito++;
     carro.textContent=productosCarrito;
     }
+=======
+>>>>>>> 0743f549f1a3ce15e205dd17b9690734fde389ec
 </script>

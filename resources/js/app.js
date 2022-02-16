@@ -120,4 +120,27 @@ formElem.onsubmit = async(e) => {
 };
 
 
+<<<<<<< HEAD
 */
+=======
+
+
+
+//Recpoge el click en Categorias
+const pescado = document.querySelector('#Pescado');
+const carne = document.querySelector('#Carne');
+
+async function id_pescado() {
+
+};
+pescado.onsubmit = async(e) => {
+    e.preventDefault();
+    let id = 2;
+    let response = await fetch('api/products/' + id);
+    let products = await response.json();
+    console.log(products);
+};
+//Aña
+pescado.addEventListener('click', id_pescado);
+}
+>>>>>>> 0743f549f1a3ce15e205dd17b9690734fde389ec
