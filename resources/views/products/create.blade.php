@@ -55,7 +55,7 @@
 
     <div class="form-group">
         <label>Precio</label>
-        <input type="number" class="form-control" name="price" required value="1">
+        <input type="double" class="form-control" name="price" required value="1">
     </div>
 
     <div class="form-group">
