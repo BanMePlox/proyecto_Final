@@ -138,22 +138,15 @@ async function guardarDatosEditados(){
 
     //Funcion que elimina los productos a la base de datos.
 
-        formEleminar.onsubmit = async(e) => {
-            const name =document.querySelector('#name');
+    formElem.onsubmit = async(e) => {
             e.preventDefault();
-            let response = await fetch('/api/products', { method: 'GET' });
-            let products = await response.json();
-             products.forEach((producto)=>{
-                       if(producto.name === name.value) {
-                           eliminarProducto(producto.id);
-                         }
-             })
-        };
-        async function eliminarProducto(id){
-            let response = await fetch('/api/productos/'+ id);
-            let products = await response.json();
+            let response = await fetch('/api/productos', {
+                method: 'POST',
+                body: new FormData(formElem)
+            });
 
-        }
+            let result = await response.json();
+        };
     //Funcion que añade un producto de la base de datos.
     formElem.onsubmit = async(e) => {
             e.preventDefault();
