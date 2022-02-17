@@ -98,6 +98,10 @@
             let divBoton= document.createElement('div');
             divBoton.classList.add('boton');
             divExterior.append(divBoton);
+             const aProducto = document.createElement('a');
+            aProducto.href = 'products/'+producto.id;
+            aProducto.textContent ='Link Producto';
+            div.append(aProducto);
             const boton = document.createElement('button');
             boton.classList.add('btn', 'btn-primary', 'btn__producto');
             boton.textContent = "Añadir al carrito";
@@ -165,6 +169,10 @@ async function mostrarMasProductos() {
         let divBoton= document.createElement('div');
         divBoton.classList.add('boton');
         divExterior.append(divBoton);
+        const aProducto = document.createElement('a');
+        aProducto.href = 'products/'+producto.id;
+        aProducto.textContent ='Link Producto';
+        div.append(aProducto);
         const boton = document.createElement('button');
         boton.classList.add('btn', 'btn-primary', 'btn__producto');
         boton.textContent = "Añadir al carrito";
