@@ -36,7 +36,7 @@
 
                 @endif
 
-                <li>
+               <li>
                     <button href="#" id="cart">
                         <a href="{{route('carrito')}}"><img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito"></a>
                     <p id="carro"></p>
@@ -46,20 +46,22 @@
     </nav>
 </header>
 <hr>
-<script>
-    let carrito = [];
-    let productosCarrito=0;
-    let idProdoductosMostrados=0;
-    let products;
-    let productosMostrados = [];
 
-   async function elegirCategoria(id) {
-    idProdoductosMostrados=0;
-       console.log(id);
-     let response = await fetch('api/products/' + id);
-     products = await response.json();
+<script>
+
+let carrito = [];
+let productosCarrito = 0;
+let idProdoductosMostrados = 0;
+let products;
+let productosMostrados = [];
+
+async function elegirCategoria(id) {
+    idProdoductosMostrados = 0;
+    console.log(id);
+    let response = await fetch('api/products/' + id);
+    products = await response.json();
     //Elimina los productos mostrados
-    const eliminarArticle= document.querySelector('article');
+    const eliminarArticle = document.querySelector('article');
     eliminarArticle.remove();
     //Recoge el main
     let main = document.querySelector('main');
@@ -72,36 +74,40 @@
     crearArticle.append(section);
     //Recorre el bucle de productos.
     products.forEach((producto) => {
-        if(idProdoductosMostrados<20){
-             //Crea el primer div que es el contenedor.
-             let divExterior = document.createElement('div');
-             divExterior.classList.add('producto');
-             section.append(divExterior);
+        if (idProdoductosMostrados < 20) {
+            //Crea el primer div que es el contenedor.
+            let divExterior = document.createElement('div');
+            divExterior.classList.add('producto');
+            section.append(divExterior);
             //Crea el div donde van el titulo, la imagen, el precio.
             let div = document.createElement('div');
             div.classList.add('producto__texto');
             let a = document.createElement('a');
-            let  precio= document.createElement('p');
-            let  descripcion= document.createElement('p');
+            let img = document.createElement('img');
+            let precio = document.createElement('p');
+            let descripcion = document.createElement('p');
             let nombre_producto = document.createElement('p');
             nombre_producto.classList.add('nombre_producto');
             precio.classList.add('precio');
+            img.classList.add("imagen__producto");
             descripcion.classList.add('descripcion');
             nombre_producto.textContent = producto.name;
-            precio.textContent = producto.price+"€";
+            precio.textContent = producto.price + "€";
             descripcion.textContent = producto.description;
+            img.src = `../Imagenes/${producto.name}.webp`;
             divExterior.append(a);
             a.append(div);
+            div.append(img);
             div.append(nombre_producto);
             div.append(descripcion);
             div.append(precio);
-            let divBoton= document.createElement('div');
+            let divBoton = document.createElement('div');
             divBoton.classList.add('boton');
             divExterior.append(divBoton);
-             const aProducto = document.createElement('a');
+            /* const aProducto = document.createElement('a');
             aProducto.href = 'products/'+producto.id;
             aProducto.textContent ='Link Producto';
-            div.append(aProducto);
+            div.append(aProducto);*/
             const boton = document.createElement('button');
             boton.classList.add('btn', 'btn-primary', 'btn__producto');
             boton.textContent = "Añadir al carrito";
@@ -116,82 +122,86 @@
     })
 
     const verMas = document.createElement('button');
-    verMas.textContent ='Ver mas';
+    verMas.textContent = 'Ver mas';
     verMas.classList.add('btnVerMas');
     verMas.addEventListener('click', function() {
-                mostrarMasProductos();
-            });
+        mostrarMasProductos();
+    });
     section.append(verMas);
 
 };
 
 async function mostrarMasProductos() {
-    idProdoductosMostrados=0;
+    idProdoductosMostrados = 0;
     let result = false;
     const section = document.querySelector('section');
     const verMasAntiguo = document.querySelector('.btnVerMas');
     verMasAntiguo.remove();
-    for(let id of productosMostrados){
-        for(let p=0; p<= products.length; p++){
-            if(products[p].id === id){
+    for (let id of productosMostrados) {
+        for (let p = 0; p <= products.length; p++) {
+            if (products[p].id === id) {
                 products.splice(p, 1);
                 break;
-            }else{
+            } else {
                 p++;
             }
 
         }
     }
     products.forEach((producto) => {
-            if(idProdoductosMostrados<20){
-        //Crea el primer div que es el contenedor.
-    let divExterior = document.createElement('div');
-    divExterior.classList.add('producto');
-    section.append(divExterior);
-        //Crea el div donde van el titulo, la imagen, el precio.
-        let div = document.createElement('div');
-        div.classList.add('producto__texto');
-        let a = document.createElement('a');
-        let  precio= document.createElement('p');
-        let  descripcion= document.createElement('p');
-        let nombre_producto = document.createElement('p');
-        nombre_producto.classList.add('nombre_producto');
-       precio.classList.add('precio');
+        if (idProdoductosMostrados < 20) {
+            //Crea el primer div que es el contenedor.
+            let divExterior = document.createElement('div');
+            divExterior.classList.add('producto');
+            section.append(divExterior);
+            //Crea el div donde van el titulo, la imagen, el precio.
+            let div = document.createElement('div');
+            div.classList.add('producto__texto');
+            let a = document.createElement('a');
+            let precio = document.createElement('p');
+            let img = document.createElement('img');
+            let descripcion = document.createElement('p');
+            let nombre_producto = document.createElement('p');
+            nombre_producto.classList.add('nombre_producto');
+            precio.classList.add('precio');
             descripcion.classList.add('descripcion');
+            img.classList.add("imagen__producto");
             nombre_producto.textContent = producto.name;
-            precio.textContent = producto.price+"€";
+            precio.textContent = producto.price + "€";
             descripcion.textContent = producto.description;
+            img.src = `../Imagenes/${producto.name}.webp`;
             divExterior.append(a);
             a.append(div);
+            div.append(img);
             div.append(nombre_producto);
             div.append(descripcion);
             div.append(precio);
-        let divBoton= document.createElement('div');
-        divBoton.classList.add('boton');
-        divExterior.append(divBoton);
-        const aProducto = document.createElement('a');
-        aProducto.href = 'products/'+producto.id;
-        aProducto.textContent ='Link Producto';
-        div.append(aProducto);
-        const boton = document.createElement('button');
-        boton.classList.add('btn', 'btn-primary', 'btn__producto');
-        boton.textContent = "Añadir al carrito";
-        boton.addEventListener('click', function() {
-            carrito.push(producto.id);
-            actualizarCarrito();
-        });
-        divBoton.append(boton);
-        idProdoductosMostrados++;
-        productosMostrados.push(producto.id);
-    }
+            let divBoton = document.createElement('div');
+            divBoton.classList.add('boton');
+            divExterior.append(divBoton);
+            /*const aProducto = document.createElement('a');
+            aProducto.href = 'products/'+producto.id;
+            aProducto.textContent ='Link Producto';
+            div.append(aProducto);*/
+            const boton = document.createElement('button');
+            boton.classList.add('btn', 'btn-primary', 'btn__producto');
+            boton.textContent = "Añadir al carrito";
+            boton.addEventListener('click', function() {
+                carrito.push(producto.id);
+                actualizarCarrito();
+            });
+            divBoton.append(boton);
+            idProdoductosMostrados++;
+            productosMostrados.push(producto.id);
+        }
 
     })
-    let verMas= document.createElement('button');
-    verMas.textContent ='Ver mas';
+    let verMas = document.createElement('button');
+    verMas.textContent = 'Ver mas';
     verMas.addEventListener('click', function() {
-            mostrarMasProductos();
-        });
-        verMas.classList.add('btnVerMas');
+        mostrarMasProductos();
+    });
+    verMas.classList.add('btnVerMas');
     section.append(verMas);
 };
 
@@ -199,9 +209,9 @@ async function actualizarCarrito() {
     let response = await fetch('api/products', { method: 'GET' });
     let products = await response.json();
 
-    products.forEach((producto)=>{
-        for (let id of carrito){
-            if(producto.id === id) {
+    products.forEach((producto) => {
+        for (let id of carrito) {
+            if (producto.id === id) {
                 anyadirCarrito(producto.id);
                 break;
             }
@@ -209,16 +219,14 @@ async function actualizarCarrito() {
     })
 };
 async function anyadirCarrito(id) {
-        let amount = {amount: id};
-
-        console.log(amount);
-        let response = await fetch('api/cart', {
+    console.log(amount);
+    let response = await fetch('api/cart', {
         method: 'POST',
         body: JSON.stringify(amount),
-      });
-      let respuesta = await response.json();
-      const carro = document.querySelector('#carro');
-      productosCarrito++;
-    carro.textContent=productosCarrito;
-    }
+    });
+    let respuesta = await response.json();
+    const carro = document.querySelector('#carro');
+    productosCarrito++;
+    carro.textContent = productosCarrito;
+}
 </script>
