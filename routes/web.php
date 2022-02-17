@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -39,10 +40,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 //RUTAS DE ADMIN (NO HAY CONTROLADOR POR ESO HAY TANTAS PERDONADME)
 Route::get('admin/stock', function() {
+    $users = User::all();
     $products = Product::all();
     $category = Category::all();
+    $cart = Cart::all();
     $productdesc = Product::select("*")->orderBy("sold")->get();
-    return view('admin/stock', compact('products', 'category', 'productdesc'));
+    return view('admin/stock', compact('products', 'category', 'productdesc', 'users', 'cart'));
 })->name('Stock')->middleware('admin');
 
 Route::get('admin/products', function() {
