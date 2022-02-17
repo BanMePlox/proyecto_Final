@@ -14,5 +14,6 @@ class Product extends Model
         return $this->belongsTo(Category::class);
         return $this->belongsToMany(Cart::class);
         return $this->hasOne(Image::class);
+        return $this->belongsTo(Ship::class);
     }
 }

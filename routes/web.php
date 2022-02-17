@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Ship;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,7 +69,11 @@ Route::get('profile/show', function() {
 })->name('profile');
 
 Route::get('cart', function() {
-    return view('cart');
+    $carts = Cart::all();
+    $users = User::all();
+    $products = Product::all();
+    $ships = Ship::all();
+    return view('cart', compact('carts', 'users', 'products', 'ships'));
 })->name('carrito');
 
 
@@ -79,4 +84,7 @@ Route::resource('/users',UserController::class);
 Route::resource('products', 'App\Http\Controllers\ProductController');
 
 Route::resource('categories', 'App\Http\Controllers\CategoryController');
+
+Route::resource('ships', 'App\Http\Controllers\ShipController');
+
 
