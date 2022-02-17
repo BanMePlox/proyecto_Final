@@ -51,8 +51,11 @@
     let productosCarrito=0;
     let idProdoductosMostrados=0;
     let products;
+    let productosMostrados = [];
 
    async function elegirCategoria(id) {
+    idProdoductosMostrados=0;
+       console.log(id);
      let response = await fetch('api/products/' + id);
      products = await response.json();
     //Elimina los productos mostrados
@@ -69,7 +72,7 @@
     crearArticle.append(section);
     //Recorre el bucle de productos.
     products.forEach((producto) => {
-        if(idProdoductosMostrados<=producto.id && producto.id<=10){
+        if(idProdoductosMostrados<20){
              //Crea el primer div que es el contenedor.
              let divExterior = document.createElement('div');
              divExterior.classList.add('producto');
@@ -78,15 +81,20 @@
             let div = document.createElement('div');
             div.classList.add('producto__texto');
             let a = document.createElement('a');
-            let imagenPro = document.createElement('img');
-            imagenPro.classList.add('imagen__producto');
-            imagenPro.src = `Imagenes/${producto.file_path}`;
-            let pNom = document.createElement('p');
-            let p = document.createElement('p');
-            p.textContent = producto.name;
+            let  precio= document.createElement('p');
+            let  descripcion= document.createElement('p');
+            let nombre_producto = document.createElement('p');
+            nombre_producto.classList.add('nombre_producto');
+            precio.classList.add('precio');
+            descripcion.classList.add('descripcion');
+            nombre_producto.textContent = producto.name;
+            precio.textContent = producto.price+"€";
+            descripcion.textContent = producto.description;
             divExterior.append(a);
             a.append(div);
-            div.append(p);
+            div.append(nombre_producto);
+            div.append(descripcion);
+            div.append(precio);
             let divBoton= document.createElement('div');
             divBoton.classList.add('boton');
             divExterior.append(divBoton);
@@ -99,6 +107,7 @@
             });
             divBoton.append(boton);
             idProdoductosMostrados++;
+            productosMostrados.push(producto.id);
         }
     })
 
@@ -113,12 +122,24 @@
 };
 
 async function mostrarMasProductos() {
-    let sumaMostrados=idProdoductosMostrados +10;
+    idProdoductosMostrados=0;
+    let result = false;
     const section = document.querySelector('section');
     const verMasAntiguo = document.querySelector('.btnVerMas');
     verMasAntiguo.remove();
+    for(let id of productosMostrados){
+        for(let p=0; p<= products.length; p++){
+            if(products[p].id === id){
+                products.splice(p, 1);
+                break;
+            }else{
+                p++;
+            }
+
+        }
+    }
     products.forEach((producto) => {
-        if(idProdoductosMostrados < producto.id  && producto.id< sumaMostrados) {
+            if(idProdoductosMostrados<20){
         //Crea el primer div que es el contenedor.
     let divExterior = document.createElement('div');
     divExterior.classList.add('producto');
@@ -127,20 +148,20 @@ async function mostrarMasProductos() {
         let div = document.createElement('div');
         div.classList.add('producto__texto');
         let a = document.createElement('a');
-        let imagenPro = document.createElement('img');
-        imagenPro.classList.add('imagen__producto');
-        imagenPro.src =  `/public/Imagenes/$2y$10$vG5KBD6prKcVM41j0G7YDuUul8IUlEHcixG59uh.l8xKNgqeqC406.jpg`;
-        let pNom = document.createElement('p');
-        let pPre = document.createElement('p');
-        pNom.classList.add('nom__pro');
-        imagenPro.alt="Foto producto";
-        pNom.textContent = producto.name;
-        pPre.textContent = producto.price+"€";
-        divExterior.append(imagenPro);
-        divExterior.append(a);
-        a.append(div);
-        div.append(pNom);
-        div.append(pPre);
+        let  precio= document.createElement('p');
+        let  descripcion= document.createElement('p');
+        let nombre_producto = document.createElement('p');
+        nombre_producto.classList.add('nombre_producto');
+       precio.classList.add('precio');
+            descripcion.classList.add('descripcion');
+            nombre_producto.textContent = producto.name;
+            precio.textContent = producto.price+"€";
+            descripcion.textContent = producto.description;
+            divExterior.append(a);
+            a.append(div);
+            div.append(nombre_producto);
+            div.append(descripcion);
+            div.append(precio);
         let divBoton= document.createElement('div');
         divBoton.classList.add('boton');
         divExterior.append(divBoton);
@@ -153,7 +174,9 @@ async function mostrarMasProductos() {
         });
         divBoton.append(boton);
         idProdoductosMostrados++;
-        }
+        productosMostrados.push(producto.id);
+    }
+
     })
     let verMas= document.createElement('button');
     verMas.textContent ='Ver mas';

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\support\Facades\Hash;
+
 class AddProductsControladorApiController extends Controller
 {
     /**
@@ -26,16 +26,8 @@ class AddProductsControladorApiController extends Controller
      */
     public function store(Request $request)
     {
+
         $product = new Product();
-        if ($request->hasFile('file_path')) {
-            $file = request()->file('file_path');
-            $hash =  Hash::make($product->name);
-            $directoryImg = $file->storeAs('/public/Imagenes',$hash. '.jpg');
-            $product->file_path = $hash;
-        } else {
-            $product->file_path = 'NULL';
-        }
-// $request->file->hashname(), file_path = $request->file->hashname();
         $product->name = $request->get('name');
         $product->price = $request->get('price');
         $product->description = $request->get('description');
@@ -45,7 +37,6 @@ class AddProductsControladorApiController extends Controller
         $product->category_id = $request->get('category_id');
         $product->save();
         return response()->json($product,201);
-
     }
 
     /**
@@ -68,9 +59,19 @@ class AddProductsControladorApiController extends Controller
      * @param  \App\Models\AddProducts  $addProducts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
-
+     $productoActualizado = Product::find($request);
+     $productoActualizado->name = $request->name;
+     $productoActualizado->price = $request->price;
+     $productoActualizado->description = $request->description;
+     $productoActualizado->stock = $request->stock;
+     $productoActualizado->file_path = $request->file_path;
+     $productoActualizado->impuesto = $request->impuesto;
+     $productoActualizado->descuento = $request->descuento;
+     $productoActualizado->category_id = $request->category_id;
+     $productoActualizado->save();
+     return response()->json($productoActualizado,201);
  }
 
     /**

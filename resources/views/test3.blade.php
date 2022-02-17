@@ -1,41 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Fetch</title>
-</head>
-<body>
-<header>
-<nav class="cabecera">
-   <a href="{{route('products.index')}}"><img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo"></a>
-   <div id="buscador">
-       <form action="" id="busqueda">
-       <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
-       <input type="text" placeholder="Busca tus productos">
-       </form>
-   </div>
-       <ul id="linea__media">
-           <li><a href="#">Categorias ▼</a>
-               <ul id="desplegable">
-                   <!--Generar lis dentro de este ul-->
-                   <li><a href="#" id=>Pescado</a></li>
-                   <li><a href="#" onclick="elegirCategoria(id=2)">Fruta</a></li>
-           </li>
-           <li><a href="#">Identificate ▼</a>
-               <ul id="desplegable">
-                   <li><a href="{{route('login')}}">Login</a></li>
-                   <li><a href="{{route('register')}}">Registrate</a></li>
-               </ul>
-           </li>
-           <li><button href="#" id="cart"><img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito" id="carro"></button></li>
-       </ul>
-</nav>
-</header>
-<hr>
-<script>
+@extends('layouts.layout')
+@php
+    $contador = 0;
+@endphp
+@section('body')
+<main>
+    <article>
+        <section class="mas__vendidos">
+            @forelse($products as $product)
+            @if ($product->disponible == 1 && $contador < 5 && $product->sold > 10)
+            <div class="producto">
+                <a href="{{Route('products.show', $product->id)}}">
+                    <img class="imagen__producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Productos">
+                    <div class="producto__texto">
+                        <p class="nom__pro">{{$product->name}}</p>
+                        <p>{{$product->price}}€</p>
+                    </div>
+                </a>
+                <div class="boton">
+                    <a class="btn__producto" href="#">Añadir al carrito</a>
+                </div>
+                @php
+                $contador++;
+            @endphp
+            </div>
+            @endif
+            @empty
+            No hay productos
 
-</script>
-</body>
-</html>
+            @endforelse
+            <br>
+{{-- Aqui terminan los mas vendidos --}}
+            </div>
+        </section>
+    </article>
+</main>
+<hr>
+@endsection
+

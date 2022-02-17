@@ -3,7 +3,7 @@
     $contador = 0;
 @endphp
 @section('body')
-<main>
+<main id="masVendidos">
     <article>
         <h2>Los mas vendidos</h2>
         <section class="mas__vendidos">
