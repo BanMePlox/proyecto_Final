@@ -17,9 +17,6 @@
                         <p>{{$product->price}}€</p>
                     </div>
                 </a>
-                <div class="boton">
-                    <a class="btn__producto" href="#">Añadir al carrito</a>
-                </div>
                 @php
                 $contador++;
             @endphp

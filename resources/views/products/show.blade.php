@@ -12,10 +12,6 @@
                 <h1>{{$product->name}}</h1>
                 <p>{{$product->description}}</p>
                 <p class="p__precio">{{$product->price}}€</p>
-                <form action="">
-                    <input class="cantidad" type="number" placeholder="Cantidad"  min="1">
-                    <input class="boton__carrito" type="submit" value="Añadir al carrito">
-                </form>
             </div>
         </div>
 
