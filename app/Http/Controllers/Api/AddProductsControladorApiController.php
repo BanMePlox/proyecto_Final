@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\support\Facades\Hash;
 class AddProductsControladorApiController extends Controller
 {
     /**
@@ -26,29 +26,25 @@ class AddProductsControladorApiController extends Controller
      */
     public function store(Request $request)
     {
-
-        if ($request->hasFile('file')) {
-
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png,webp'
-            ]);
-
-            $request->file->storeAs('product', 'public');
-
-            $product = new Product([
-                "name" => $request->get('name'),
-                "description" => $request->get('description'),
-                "price" => $request->get('price'),
-                "impuesto" => $request->get('impuesto'),
-                "descuento" => $request->get('descuento'),
-                "stock" => $request->get('stock'),
-                "category_id" => $request->get('category_id'),
-                "file_path" =>$request->get('file_path'),
-            ]);
-            $product->save();
+        $product = new Product();
+        if ($request->hasFile('file_path')) {
+            $file = request()->file('file_path');
+            $hash =  Hash::make($product->name);
+            $directoryImg = $file->storeAs('/public/Imagenes',$hash. '.jpg');
+            $product->file_path = $hash;
+        } else {
+            $product->file_path = 'NULL';
         }
-
-        return response()->json('Hola',201);
+// $request->file->hashname(), file_path = $request->file->hashname();
+        $product->name = $request->get('name');
+        $product->price = $request->get('price');
+        $product->description = $request->get('description');
+        $product->stock = $request->get('stock');
+        $product->impuesto = $request->get('impuesto');
+        $product->descuento = $request->get('descuento');
+        $product->category_id = $request->get('category_id');
+        $product->save();
+        return response()->json($product,201);
 
     }
 
@@ -72,19 +68,9 @@ class AddProductsControladorApiController extends Controller
      * @param  \App\Models\AddProducts  $addProducts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Product $product)
     {
-     $productoActualizado = Product::find($request);
-     $productoActualizado->name = $request->name;
-     $productoActualizado->price = $request->price;
-     $productoActualizado->description = $request->description;
-     $productoActualizado->stock = $request->stock;
-     $productoActualizado->file_path = $request->file_path;
-     $productoActualizado->impuesto = $request->impuesto;
-     $productoActualizado->descuento = $request->descuento;
-     $productoActualizado->category_id = $request->category_id;
-     $productoActualizado->save();
-     return response()->json($productoActualizado,201);
+
  }
 
     /**

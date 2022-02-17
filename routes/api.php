@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::apiResource('/apiusers', UserApiController::class);
 // Route::apiResource('/apicategories', CategoryApiController::class);
 Route::apiResource('/productos',AddProductsControladorApiController::class)->
-        parameters(['productos'=> 'product'])->except(['update']);
+        parameters(['productos'=> 'product']);
 Route:: apiResource('/products',ListProductApiController::class);
 
 Route:: apiResource('/categories',CategoryApiController::class);

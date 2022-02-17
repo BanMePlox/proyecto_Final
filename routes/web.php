@@ -32,6 +32,9 @@ Route::get('/test2', function () {
 Route::get('/test3', function () {
     return view('test3', );
 });
+Route::get('/test4', function () {
+    return view('test4', );
+});
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

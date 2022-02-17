@@ -69,7 +69,7 @@
     crearArticle.append(section);
     //Recorre el bucle de productos.
     products.forEach((producto) => {
-        if(idProdoductosMostrados<=producto.id && producto.id<=3){
+        if(idProdoductosMostrados<=producto.id && producto.id<=10){
              //Crea el primer div que es el contenedor.
              let divExterior = document.createElement('div');
              divExterior.classList.add('producto');
@@ -78,6 +78,10 @@
             let div = document.createElement('div');
             div.classList.add('producto__texto');
             let a = document.createElement('a');
+            let imagenPro = document.createElement('img');
+            imagenPro.classList.add('imagen__producto');
+            imagenPro.src = `Imagenes/${producto.file_path}`;
+            let pNom = document.createElement('p');
             let p = document.createElement('p');
             p.textContent = producto.name;
             divExterior.append(a);
@@ -109,7 +113,7 @@
 };
 
 async function mostrarMasProductos() {
-    let sumaMostrados=idProdoductosMostrados +3;
+    let sumaMostrados=idProdoductosMostrados +10;
     const section = document.querySelector('section');
     const verMasAntiguo = document.querySelector('.btnVerMas');
     verMasAntiguo.remove();
@@ -125,6 +129,7 @@ async function mostrarMasProductos() {
         let a = document.createElement('a');
         let imagenPro = document.createElement('img');
         imagenPro.classList.add('imagen__producto');
+        imagenPro.src =  `/public/Imagenes/$2y$10$vG5KBD6prKcVM41j0G7YDuUul8IUlEHcixG59uh.l8xKNgqeqC406.jpg`;
         let pNom = document.createElement('p');
         let pPre = document.createElement('p');
         pNom.classList.add('nom__pro');
