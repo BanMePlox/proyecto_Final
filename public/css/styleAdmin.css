@@ -1,0 +1,111 @@
+/** Index Admin **/
+body{
+    margin: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+a:active{
+    color: white;
+}
+.cabecera{
+    color: white;
+    background-color: lightskyblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.cabecera a{
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.admin__image{
+    width: 150px;
+    height: 150px;
+}
+.contenedor__admin{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 60px;
+    padding: 20px 10px;
+    margin-top: 15px;
+    align-content: center;
+}
+.logo{
+    width: 300px;
+    height: 150px;
+}
+.boton__index-admin {
+    padding: .6rem 1rem;
+    border: 1px solid #995309;
+    border-radius: 4px;
+    background-color: #d9750b;
+    color: #fff;
+  
+    font-size: 1.5rem;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+      0 1px 3px rgba(0,0,0,.2);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#f90),to(#e76a00));
+    background-image: linear-gradient(#f90 10%,#e76a00 100%);
+  }
+  
+  .boton__index-admin:hover, .boton__index-admin:focus {
+    background-color: #e0811b;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#f0a100),to(#f70));
+    background-image: linear-gradient(#f0a100 10%,#f70 100%);
+  }
+  
+  .boton__index-admin:active {
+    background-color: #cf6a00;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.2) inset;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#f0a100),to(#f70));
+    background-image: linear-gradient(#f0a100 10%,#f70 100%);
+  }
+/**Pagina Producto**/
+td{
+    border: 1px solid black;
+}
+.tabla{
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    width: 100%
+}
+.Imagen__Producto{
+    width: 200px;
+    height: 100px;
+}
+.cabecera__tabla{
+    background-color: gray;
+}
+@media(max-width:720px){
+    .tabla{
+        width: 90%;
+    }
+    .contenedor__admin{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+/** Pagina de Stock**/
+
+.cuerpo{
+    text-align: center;
+}
+.cuerpo > h2{
+    font-size: 45px;
+}
+
+/** Botones añadir o eliminar**/
+.elim{
+    background-color: red;
+    color: white;
+
+}
+.modif{
+    background-color: green;
+    color: white;
+
+}
