@@ -28,6 +28,7 @@ class AddProductsControladorApiController extends Controller
     {
 
         $product = new Product();
+
         $product->name = $request->get('name');
         $product->price = $request->get('price');
         $product->description = $request->get('description');
