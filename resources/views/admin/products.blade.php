@@ -13,12 +13,58 @@
         <a href="{{route('indexadmin')}}">Admin menu</a>
     </header>
 
+<<<<<<< HEAD
 <form id="BotonesPrincipales"  type="POST" enctype="multipart/formdata" style="display:" class="">
     <button type="submit" id="boton_anyadir" value="Añadir" onclick="anyadirProductos(event)">Añadir productos</button>
     <button type="submit" id="boton_anyadir" value="Añadir" onclick="modificarProductos(event)">Modificar un producto</button>
     <button type="submit" id="boton_anyadir" value="Añadir" onclick="eliminarProductos(event)">Eliminar un producto</button>
+=======
+<form id="BotonesPrincipales"  type="POST" enctype="multipart/formdata" style="display:">
+    <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="anyadirProductos(event)">Añadir productos</button>
+    <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="modificarProductos()">Modificar un producto</button>
+    <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="eliminarProductos()">Eliminar un producto</button>
+>>>>>>> 34685455a91587f6ef048bb1caca8fa693bca30c
 
 </form>
+
+<article>
+    <table class="tabla">
+        <h1>LISTA DE PRODUCTOS</h1>
+        <div id="buscador">
+            <form action="" id="busqueda">
+            <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
+            <input type="text" placeholder="Busca tus productos">
+            </form>
+        </div>
+        <tr class="cabecera__tabla">
+            <td>ID Producto</td>
+            <td>Nombre Producto</td>
+            <td>Stock</td>
+            <td>Categoria</td>
+            <td>Precio</td>
+            <td>Disponibilidad</td>
+        </tr>
+        @forelse ($products as $product)
+        <tr>
+            <td>{{$product->id}}</td>
+            <td>{{$product->name}}</td>
+            <td>{{$product->stock}}</td>
+            <td>{{$product->category_id}}</td>
+            <td>{{$product->price}}€</td>
+            <td>
+                @if($product->disponible == 0)
+                    No disponible
+                @else
+                    Disponible
+                @endif
+            </td>
+        </tr>
+        @empty
+            No hay productos
+        @endforelse
+    </table>
+</article>
+</main>
 
 
 {{---Formulario para añadir productos---}}

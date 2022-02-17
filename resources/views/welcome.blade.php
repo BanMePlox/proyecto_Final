@@ -11,7 +11,7 @@
             @if ($product->disponible == 1 && $contador < 5 && $product->sold > 10)
             <div class="producto">
                 <a href="{{Route('products.show', $product->id)}}">
-                    <img class="imagen__producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Productos">
+                    <img src="{{URL::asset('Imagenes/'.$product->file_path)}}" alt="lupa" class="imagen__producto">
                     <div class="producto__texto">
                         <p class="nom__pro">{{$product->name}}</p>
                         <p>{{$product->price}}€</p>
