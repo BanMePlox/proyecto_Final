@@ -14,7 +14,7 @@ class AddIdshipToCartsTable extends Migration
     public function up()
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->foreignId('id_ship')->nullable()->constrained();
+           /* $table->foreignId('id_ship')->nullable()->constrained();*/
         });
     }
 

@@ -15,8 +15,8 @@
 
 <form id="BotonesPrincipales"  type="POST" enctype="multipart/formdata" style="display:" class="">
     <button type="submit" id="boton_anyadir" value="Añadir" onclick="anyadirProductos(event)">Añadir productos</button>
-    <button type="submit" id="boton_anyadir" value="Añadir" onclick="modificarProductos()">Modificar un producto</button>
-    <button type="submit" id="boton_anyadir" value="Añadir" onclick="eliminarProductos()">Eliminar un producto</button>
+    <button type="submit" id="boton_anyadir" value="Añadir" onclick="modificarProductos(event)">Modificar un producto</button>
+    <button type="submit" id="boton_anyadir" value="Añadir" onclick="eliminarProductos(event)">Eliminar un producto</button>
 
 </form>
 
@@ -78,7 +78,7 @@
    const formEleminar = document.querySelector('#formElem_eliminar');
 
     //Hace visible el formulario de añadir productos.
-   async function anyadirProductos(){
+   async function anyadirProductos(event){
        event.preventDefault();
         const botonesPrincipales = document.querySelector('#BotonesPrincipales');
             if (botonesPrincipales.style.display=="none") {
@@ -90,7 +90,7 @@
             }
 
     }
-    async function modificarProductos(){
+    async function modificarProductos(event){
         event.preventDefault();
         const botonesPrincipales = document.querySelector('#BotonesPrincipales');
             if (botonesPrincipales.style.display=="none") {
@@ -102,7 +102,7 @@
             }
 
     }
-    async function eliminarProductos(){
+    async function eliminarProductos(event){
         event.preventDefault();
         const botonesPrincipales = document.querySelector('#BotonesPrincipales');
             if (botonesPrincipales.style.display=="none") {

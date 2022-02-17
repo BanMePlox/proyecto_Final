@@ -104,10 +104,10 @@ async function elegirCategoria(id) {
             let divBoton = document.createElement('div');
             divBoton.classList.add('boton');
             divExterior.append(divBoton);
-            /* const aProducto = document.createElement('a');
+             const aProducto = document.createElement('a');
             aProducto.href = 'products/'+producto.id;
             aProducto.textContent ='Link Producto';
-            div.append(aProducto);*/
+            div.append(aProducto);
             const boton = document.createElement('button');
             boton.classList.add('btn', 'btn-primary', 'btn__producto');
             boton.textContent = "Añadir al carrito";
@@ -179,12 +179,12 @@ async function mostrarMasProductos() {
             let divBoton = document.createElement('div');
             divBoton.classList.add('boton');
             divExterior.append(divBoton);
-            /*const aProducto = document.createElement('a');
+            const aProducto = document.createElement('a');
             aProducto.href = 'products/'+producto.id;
             aProducto.textContent ='Link Producto';
-            div.append(aProducto);*/
+            div.append(aProducto);
             const boton = document.createElement('button');
-            boton.classList.add('btn', 'btn-primary', 'btn__producto');
+            boton.classList.add('btn', 'btn-primary', 'btn__producto')
             boton.textContent = "Añadir al carrito";
             boton.addEventListener('click', function() {
                 carrito.push(producto.id);
@@ -212,17 +212,17 @@ async function actualizarCarrito() {
     products.forEach((producto) => {
         for (let id of carrito) {
             if (producto.id === id) {
-                anyadirCarrito(producto.id);
+                anyadirCarrito(producto);
                 break;
             }
         }
     })
 };
-async function anyadirCarrito(id) {
-    console.log(amount);
+async function anyadirCarrito(producto) {
+    let envio = {amount: producto.amount};
     let response = await fetch('api/cart', {
         method: 'POST',
-        body: JSON.stringify(amount),
+        body: JSON.stringify(envio),
     });
     let respuesta = await response.json();
     const carro = document.querySelector('#carro');

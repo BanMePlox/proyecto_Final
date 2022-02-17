@@ -17,7 +17,7 @@ class ListProductApiController extends Controller
     public function index()
     {
 
-        $sql = 'SELECT * FROM products';
+        $sql = Product::all()->where('mca_borrado','===', 0);
         $products = DB::select($sql);
         return response()->json($products,200);
     }
