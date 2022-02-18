@@ -2,12 +2,6 @@
 <header>
     <nav class="cabecera">
         <a href="{{route('products.index')}}"><img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo"></a>
-        <div id="buscador">
-            <form action="" id="busqueda">
-            <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
-            <input type="text" placeholder="Busca tus productos">
-            </form>
-        </div>
             <ul id="linea__media">
                 <li><a href="#">Categorias ▼</a>
                     <ul id="desplegable">
