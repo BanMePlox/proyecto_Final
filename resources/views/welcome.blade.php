@@ -90,5 +90,4 @@
 </main>
 <hr>
 @endsection
-<script>
-</script>
+

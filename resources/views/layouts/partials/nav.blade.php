@@ -12,6 +12,7 @@
                         <li><a href="#" onclick="elegirCategoria(3)">Panaderia</a></li>
                     </ul>
                 </li>
+
                 @if(!Auth::check())
                 <li><a href="#">Identificate ▼</a>
                     <ul id="desplegable">
@@ -48,7 +49,7 @@ let productosCarrito = 0;
 let idProdoductosMostrados = 0;
 let products;
 let productosMostrados = [];
-let carrito =[];
+let carrito = [];
 let cantidad
 async function elegirCategoria(id) {
     idProdoductosMostrados = 0;
@@ -81,26 +82,30 @@ async function elegirCategoria(id) {
             let precio = document.createElement('p');
             let descripcion = document.createElement('p');
             let nombre_producto = document.createElement('p');
+            //Añadimos las clases
             nombre_producto.classList.add('nombre_producto');
             precio.classList.add('precio');
             img.classList.add("imagen__producto");
             descripcion.classList.add('descripcion');
+            //Añadimos TextContent
             nombre_producto.textContent = producto.name;
             precio.textContent = producto.price + "€";
             descripcion.textContent = producto.description;
             img.src = `../Imagenes/${producto.name}.webp`;
+            //hacemos los append
             divExterior.append(a);
             a.append(div);
             div.append(img);
             div.append(nombre_producto);
             div.append(descripcion);
             div.append(precio);
+            //creamos los elementos
             let divBoton = document.createElement('div');
             divBoton.classList.add('boton');
             divExterior.append(divBoton);
-             const aProducto = document.createElement('a');
-            aProducto.href = 'products/'+producto.id;
-            aProducto.textContent ='Link Producto';
+            const aProducto = document.createElement('a');
+            aProducto.href = 'products/' + producto.id;
+            aProducto.textContent = 'Link Producto';
             div.append(aProducto);
             const boton = document.createElement('button');
             boton.classList.add('btn', 'btn-primary', 'btn__producto');
@@ -116,7 +121,7 @@ async function elegirCategoria(id) {
     const verMas = document.createElement('button');
     verMas.textContent = 'Ver mas';
     verMas.classList.add('btnVerMas');
-    verMas.addEventListener('click', function() {
+    verMas.addEventListener('click', function () {
         mostrarMasProductos();
     });
     section.append(verMas);
@@ -172,8 +177,8 @@ async function mostrarMasProductos() {
             divBoton.classList.add('boton');
             divExterior.append(divBoton);
             const aProducto = document.createElement('a');
-            aProducto.href = 'products/'+producto.id;
-            aProducto.textContent ='Link Producto';
+            aProducto.href = 'products/' + producto.id;
+            aProducto.textContent = 'Link Producto';
             div.append(aProducto);
             const boton = document.createElement('button');
             boton.classList.add('btn', 'btn-primary', 'btn__producto')
@@ -188,20 +193,20 @@ async function mostrarMasProductos() {
     })
     let verMas = document.createElement('button');
     verMas.textContent = 'Ver mas';
-    verMas.addEventListener('click', function() {
+    verMas.addEventListener('click', function () {
         mostrarMasProductos();
     });
     verMas.classList.add('btnVerMas');
     section.append(verMas);
 };
 
-function anyadirCarrito(evento){
+function anyadirCarrito(evento) {
     carrito.push(evento.target.getAttribute('marcador'))
     let btnCarrito = document.querySelector('#carro');
-    btnCarrito.textContent= carrito.length;
+    btnCarrito.textContent = carrito.length;
 }
 
- function mostrarCarrito() {
+function mostrarCarrito() {
     const eliminarArticle = document.querySelector('article');
     eliminarArticle.remove();
     let crearArticle = document.createElement('article');
@@ -210,34 +215,34 @@ function anyadirCarrito(evento){
     carritoSinDuplicados.forEach((item) => {
         // Obtenemos el item que necesitamos de la variable base de datos
         const miItem = products.filter((itemBaseDatos) => {
-        // ¿Coincide las id? Solo puede existir un caso
-        return itemBaseDatos.id === parseInt(item);
-    });
-    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-    // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
-    return itemId === item ? total += 1 : total;
-    }, 0);
-    main.append(crearArticle);
-    //Crea el primer div que es el contenedor.
-    let div = document.createElement('div');
-    div.classList.add('divCarrito');
-    crearArticle.append(div);
-    let infoProducto = document.createElement('p');
-    infoProducto.classList.add('infoCarrito');
-    infoProducto.textContent = `${numeroUnidadesItem} x ${miItem[0].name} - ${miItem[0].price}€`;
-    const miBoton = document.createElement('button');
-    miBoton.classList.add('btnElimiar');
-    miBoton.textContent = 'Eliminar';
-    miBoton.dataset.item = item;
-    miBoton.addEventListener('click', borrarItemCarrito);
-    // Añadimos al html
-    div.append(miBoton);
-    div.append(infoProducto);
+            // ¿Coincide las id? Solo puede existir un caso
+            return itemBaseDatos.id === parseInt(item);
+        });
+        const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+            // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+            return itemId === item ? total += 1 : total;
+        }, 0);
+        main.append(crearArticle);
+        //Crea el primer div que es el contenedor.
+        let div = document.createElement('div');
+        div.classList.add('divCarrito');
+        crearArticle.append(div);
+        let infoProducto = document.createElement('p');
+        infoProducto.classList.add('infoCarrito');
+        infoProducto.textContent = `${numeroUnidadesItem} x ${miItem[0].name} - ${miItem[0].price}€`;
+        const miBoton = document.createElement('button');
+        miBoton.classList.add('btnElimiar');
+        miBoton.textContent = 'Eliminar';
+        miBoton.dataset.item = item;
+        miBoton.addEventListener('click', borrarItemCarrito);
+        // Añadimos al html
+        div.append(miBoton);
+        div.append(infoProducto);
     });
     const botonVaciar = document.createElement('button');
-    botonVaciar.addEventListener('click',vaciarCarrito)
+    botonVaciar.addEventListener('click', vaciarCarrito)
     botonVaciar.classList.add('botonVaciar');
-    botonVaciar.textContent='Vaciar Carrito';
+    botonVaciar.textContent = 'Vaciar Carrito';
     const precioTotal = document.createElement('p');
     precioTotal.classList.add('precioTotal')
     const hr = document.createElement('hr');
@@ -248,32 +253,32 @@ function anyadirCarrito(evento){
     hr.append(precioTotal);
     hr.append(botonVaciar);
 
- }
-    function borrarItemCarrito(evento){
-        const id = evento.target.dataset.item;
-         // Borramos todos los productos
-        carrito = carrito.filter((carritoId) => {
+}
+function borrarItemCarrito(evento) {
+    const id = evento.target.dataset.item;
+    // Borramos todos los productos
+    carrito = carrito.filter((carritoId) => {
         return carritoId !== id;
+    });
+    // volvemos a renderizar
+    mostrarCarrito();
+}
+function calcularTotal() {
+    // Recorremos el array del carrito
+    return carrito.reduce((total, item) => {
+        // De cada elemento obtenemos su precio
+        const miItem = products.filter((itemBaseDatos) => {
+            return itemBaseDatos.id === parseInt(item);
         });
-              // volvemos a renderizar
-              mostrarCarrito();
-    }
-          function calcularTotal() {
-              // Recorremos el array del carrito
-              return carrito.reduce((total, item) => {
-                  // De cada elemento obtenemos su precio
-                  const miItem = products.filter((itemBaseDatos) => {
-                      return itemBaseDatos.id === parseInt(item);
-                  });
-                  // Los sumamos al total
-                  return total + miItem[0].price;
-              }, 0).toFixed(2);
-          }
-          function vaciarCarrito() {
-              // Limpiamos los productos guardados
-              carrito = [];
-              // Renderizamos los cambios
-              mostrarCarrito();
-          }
+        // Los sumamos al total
+        return total + miItem[0].price;
+    }, 0).toFixed(2);
+}
+function vaciarCarrito() {
+    // Limpiamos los productos guardados
+    carrito = [];
+    // Renderizamos los cambios
+    mostrarCarrito();
+}
 
     </script>
