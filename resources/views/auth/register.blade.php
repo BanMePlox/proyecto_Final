@@ -72,7 +72,7 @@
     </x-jet-authentication-card>
 </x-guest-layout>
 <script>
-const btnEnviar = document.querySelector('#btn-enviar');
+    const btnEnviar = document.querySelector('#btn-enviar');
 const form = document.querySelector('#formulario');
 let div = document.createElement('div');
 div.classList.add('error');

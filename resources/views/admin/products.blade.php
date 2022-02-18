@@ -21,70 +21,31 @@
 </form>
 </section>
 <article>
-    <table class="tabla">
-        <h1>LISTA DE PRODUCTOS</h1>
-        <div id="buscador">
-            <form action="" id="busqueda">
-            <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
-            <input type="text" placeholder="Busca tus productos">
-            </form>
-        </div>
-        <tr class="cabecera__tabla">
-            <td></td>
-            <td>ID Producto</td>
-            <td>Nombre Producto</td>
-            <td>Stock</td>
-            <td>Categoria</td>
-            <td>Precio</td>
-            <td>Disponibilidad</td>
-        </tr>
-        @forelse ($products as $product)
-        <tr>
-            <td><input type="checkbox" name="skills" onclick="eliminarProducto($product->id)"></td>
-            <td>{{$product->id}}</td>
-            <td>{{$product->name}}</td>
-            <td>{{$product->stock}}</td>
-            <td>{{$product->category_id}}</td>
-            <td>{{$product->price}}€</td>
-            <td>
-                @if($product->disponible == 0)
-                    No disponible
-                @else
-                    Disponible
-                @endif
-            </td>
-        </tr>
-        @empty
-            No hay productos
-        @endforelse
-    </table>
-</article>
-</main>
 
 
 {{---Formulario para añadir productos---}}
 @csrf
 @method('POST')
 <form id="formElem_anyadir" enctype="multipart/formdata" style="display:none">
-    <input type="text" name="name" value="Nombre del producto">
-    <input type="text" name="description" value="Descripcion">
+    <input type="text" name="name" placeholder="Nombre del producto">
+    <input type="text" name="description"  placeholder="Descripcion">
     <select name="category_id" id="select_category_id">
         <option value="1">Pescaderia</option>
         <option value="2">Carniceria</option>
         <option value="3">Panaderia</option>
     </select>
-    <input type="number" class="form-control" name="price">
-    <input type="number" class="form-control" name="impuesto">
-    <input type="number" class="form-control" name="descuento">
-    <input type="number" class="form-control" name="stock">
+    <input type="number" class="form-control" name="price"  placeholder="Precio">
+    <input type="number" class="form-control" name="impuesto"  placeholder="Impuestos">
+    <input type="number" class="form-control" name="descuento"  placeholder="Descuento">
+    <input type="number" class="form-control" name="stock"  placeholder="stock">
     <button type="submit" id="boton_anyadir" value="Añadir">Añadir</button>
-    <button type="submit" id="boton_atras1" value="Eliminar" onclick="anyadirProductos(event)">Atras</button>
+    <button type="submit" id="boton_atras1" value="Eliminar" onclick="anyadirProductos(event)">ATRAS</button>
   </form>
 
    <form id="formElem_modificar" style="display:none">
     <input type="text" name="id" value="Id del producto" id="idProducto">
     <button type="submit" id="boton_buscar" value="Buscar">Buscar</button>
-    <button type="submit" id="boton_atras1" value="Eliminar" onclick="modificarProductos()">Atras</button>
+    <button type="submit" id="boton_atras1" value="Eliminar" onclick="modificarProductos()">ATRAS</button>
   </form>
 
  <form id="formElem_modificando" style="display:none">
@@ -100,8 +61,28 @@
   <input type="number" class="form-control" name="descuento" id="descuento">
   <input type="number" class="form-control" name="stock" id="stock">
   <button type="submit" id="boton_editar" value="Buscar" onclick="guardarDatosEditados()">EDITAR</button>
-  <button type="submit" id="boton_atras1" value="Eliminar" onclick="modificarProductos()">Atras</button>
+  <button type="submit" id="boton_atras1" value="Eliminar" onclick="modificarProductos()">ATRAS</button>
 </form>
+
+    <table class="tabla">
+        <h1>LISTA DE PRODUCTOS</h1>
+        <div id="buscador">
+            <form action="" id="busqueda">
+            <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
+            <input type="text" placeholder="Busca tus productos">
+            </form>
+        </div>
+        <tr class="cabecera__tabla">
+            <td>ID Producto</td>
+            <td>Nombre Producto</td>
+            <td>Stock</td>
+            <td>Categoria</td>
+            <td>Precio</td>
+            <td>Disponibilidad</td>
+        </tr>
+    </table>
+</article>
+</main>
 
 </body>
 
@@ -157,11 +138,11 @@
         const price =document.querySelector('#price');
         const impuesto = document.querySelector('#impuesto');
         const stock = document.querySelector('#stock');
-        name.value =producto.name;
-        description.value = producto.description;
-        price.value = producto.price;
-        impuesto.value = producto.impuesto;
-        stock.value= producto.stock;
+        name.textContent = producto.name;
+        description.textContent = producto.description;
+        price.textContent = producto.price;
+        impuesto.textContent = producto.impuesto;
+        stock.textContent= producto.stock;
         formModificando.style.display="";
     }
 async function guardarDatosEditados(){
@@ -190,8 +171,68 @@ async function guardarDatosEditados(){
                 method: 'POST',
                 body: new FormData(formElem)
             });
-
+            obtenerProductos();
+            limpiarFormulario()
             let result = await response.json();
         };
+    async function obtenerProductos(){
+        let response = await fetch('/api/products/',{
+            method: 'GET'
+        });
+       let productosObtenidos = await response.json();
+  const tabla = document.querySelector('.tabla');
+        productosObtenidos.forEach((producto) => {
+             // Obtener la referencia de la tabla
+  // Crea las celdas
+  for (var i = 0; i < 1; i++) {
+    // Crea las hileras de la tabla
+    var hilera = document.createElement("tr");
+    for (var j = 0; j < 6; j++) {
+      var celda = document.createElement("td");
+      if(j===0){
+      var textoCelda = document.createTextNode(producto.id);
+      }
+      if(j===1){
+      var textoCelda = document.createTextNode(producto.name);
+      }
+      if(j===2){
+      var textoCelda = document.createTextNode(producto.stock);
+      }
+      if(j===3){
+        if(producto.category_id === 1){
+            var textoCelda = document.createTextNode( "Pescaderia");
+            }
+            if(producto.category_id === 2){
+                var textoCelda = document.createTextNode( "Carniceria");
+            }
+            if(producto.category_id === 3){
+                var textoCelda = document.createTextNode( "Panaderia");
+            }
+      }
+      if(j===4){
+      var textoCelda = document.createTextNode(producto.price);
+      }
+      if(j===5){
+        if(producto.mca_borrado === 0){
+            var textoCelda = document.createTextNode( "Disponible");
+            }
+            if(producto.mca_borrado === 1){
+            var textoCelda = document.createTextNode( "Baja");
+            }
+      }
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+    }
+    // agrega la hilera al final de la tabla (al final del elemento tblbody)
+    tabla.appendChild(hilera);
+  }
+
+        });
+    }
+    function limpiarFormulario() {
+        formElem.reset();
+  }
+    obtenerProductos();
+
      </script>
 

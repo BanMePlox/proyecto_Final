@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}" >
+        <form method="POST" action="{{ route('login') }}"  id="formulario">
             @csrf
 
             <div>
@@ -39,10 +39,58 @@
                     </a>
                 @endif
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4" id="btn-enviar">
                     {{ __('Conectarse') }}
                 </x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+<script>
+
+const btnEnviar = document.querySelector('#btn-enviar');
+const form = document.querySelector('#formulario');
+let div = document.createElement('div');
+div.classList.add('error');
+let botonCSS = {
+    width: '100%',
+    height: '20%',
+    backgroundColor: '#ffd1d1',
+    color: 'black',
+    border: '1px solid red',
+    marginBottom: '5px',
+}
+Object.assign(div.style, botonCSS);
+
+function validarEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
+async function comprobarFormulario(e) {
+    let ready = false;
+    if (form.email.value != "" && form.password.value != "") {
+        ready = true;
+    } else {
+        ready = false;
+        form.prepend(div);
+        div.textContent = "Revise los campos, algunos estan vacios";
+        setTimeout(() => div.remove(), 3000);
+
+    }
+
+
+    if (ready) {
+        if (validarEmail(form.email.value)) {
+
+        } else {
+            form.prepend(div);
+            div.textContent = "El email no tiene un formato valido!";
+            setTimeout(() => div.remove(), 3000);
+            form.email.focus();
+        }
+    }
+
+}
+btnEnviar.addEventListener("click", comprobarFormulario);
+</script>
