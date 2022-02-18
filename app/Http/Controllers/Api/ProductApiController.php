@@ -60,6 +60,14 @@ class ProductApiController extends Controller
         return response()->json($product,200);
     }
 
+    public function updatebaja($id,$mca_borrado)
+    {
+        $product = Product::findOrFail($id);
+        $product->mca_borrado=$mca_borrado;
+        $product->save();
+        return response()->json($product,200);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

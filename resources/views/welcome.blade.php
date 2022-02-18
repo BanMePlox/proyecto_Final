@@ -11,7 +11,7 @@
         <h1 class="h1welcome">Los mas vendidos</h1>
         <section class="mas__vendidos">
             @forelse($products as $product)
-            @if ($product->disponible == 1 && $contador < 5 && $product->sold > 10)
+            @if ($product->mca_borrado == 1 && $contador < 5 && $product->sold > 10)
             <div class="producto">
                 <a href="{{Route('products.show', $product->id)}}">
                     <img src="{{URL::asset('Imagenes/'.$product->file_path)}}" alt="lupa" class="imagen__producto">
@@ -41,7 +41,7 @@
             <h1 class="h1welcome">Pescados con poco stock</h1>
         <section class="mas__vendidos">
             @forelse($products as $product)
-                @if ($product->category_id == 1 && $contador2 < 5 && $product->stock < 15 && $product->disponible == 1)
+                @if ($product->category_id == 1 && $contador2 < 5 && $product->stock < 15 && $product->mca_borrado == 1)
                     <div class="producto">
                         <a href="{{Route('products.show', $product->id)}}">
                             <img src="{{URL::asset('Imagenes/'.$product->file_path)}}" alt="lupa" class="imagen__producto">
@@ -66,7 +66,7 @@
         <h1 class="h1welcome">Novedades</h1>
         <section class="mas__vendidos">
             @forelse($products->reverse() as $product)
-                @if ($contador3 < 5 && $product->disponible == 1)
+                @if ($contador3 < 5 && $product->mca_borrado == 1)
                     <div class="producto">
                         <a href="{{Route('products.show', $product->id)}}">
                             <img src="{{URL::asset('Imagenes/'.$product->file_path)}}" alt="lupa" class="imagen__producto">

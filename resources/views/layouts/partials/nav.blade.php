@@ -1,6 +1,7 @@
 
 <header>
     <nav class="cabecera">
+        <a href="#masVendidos"></a>
         <a href="{{route('products.index')}}"><img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo"></a>
             <ul id="linea__media">
                 <li><a href="#">Categorias ▼</a>

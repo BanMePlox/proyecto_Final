@@ -68,8 +68,8 @@
                         <tr>
                             <td>{{$pedidos->id}}</td>
                             <td>{{$pedidos->id_usuario}}</td>
-                            <td>13/12/2000</td>
-                            <td>15€</td>
+                            <td>{{$pedidos->order_date}}</td>
+                            <td>{{$pedidos->total_price}}</td>
                         </tr>
                     @empty
 
@@ -88,7 +88,7 @@
                         <td>Cantidad de Stock</td>
                     </tr>
                     @forelse ($products as $product)
-                    @if ($product->stock < 10 && $product->disponible == 1)
+                    @if ($product->stock < 10 && $product->mca_borrado == 1)
                     <tr>
                         <td><img class="Imagen__Producto" src="{{URL::asset('Imagenes/'.$product->file_path)}}" alt="Imagen Producto"></td>
                         <td>{{$product->name}}</td>

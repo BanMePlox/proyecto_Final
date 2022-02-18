@@ -17,7 +17,7 @@
 <form id="BotonesPrincipales"  type="POST" enctype="multipart/formdata" style="display:">
     <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="anyadirProductos(event)">Añadir productos</button>
     <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="modificarProductos(event)">Modificar un producto</button>
-
+    <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="eliminarProductos(event)">Eliminar producto</button>
 </form>
 </section>
 <article>
@@ -59,6 +59,13 @@
   <button type="submit" id="boton_atras1" value="Eliminar" onclick="modificarProductos()">ATRAS</button>
 </form>
 
+<form id="formEliminar" style="display:none">
+    <input type="text" name="id"  id="id" placeholder="Id del producto">
+    <input type="text" name="mca_borrado"  id="mca_borrado">
+  <button type="submit" id="boton_editar" value="Buscar">EDITAR</button>
+  <button type="submit" id="boton_atras1" value="Eliminar" onclick="eliminarProductos()">ATRAS</button>
+</form>
+
     <table class="tabla">
         <h1>LISTA DE PRODUCTOS</h1>
 
@@ -80,7 +87,7 @@
 <script>
       const formElem = document.querySelector('#formElem_anyadir');
    const formModificando = document.querySelector('#formElem_modificar');
-   const formEleminar = document.querySelector('#formElem_eliminar');
+   const formEliminar = document.querySelector('#formEliminar');
 
     //Hace visible el formulario de añadir productos.
    async function anyadirProductos(event){
@@ -108,6 +115,19 @@
 
     }
 
+    async function eliminarProductos(event){
+        event.preventDefault();
+        const botonesPrincipales = document.querySelector('#BotonesPrincipales');
+            if (botonesPrincipales.style.display=="none") {
+                botonesPrincipales.style.display = "";
+                formEliminar.style.display="none";
+            } else {
+                botonesPrincipales.style.display = "none";
+                formEliminar.style.display="";
+            }
+
+    }
+
     //Funcion que modifica los productos
      formModificando.onsubmit = async(event) =>{
          event.preventDefault();
@@ -125,14 +145,13 @@
 
     //Funcion que elimina los productos a la base de datos.
 
-    async function eliminarProductos(idProducto){
-        let response = await fetch('/api/productos', {
-                method: 'PATCH',
-                body: new FormData(formElem)
-            });
-
+    //Funcion que elimina los productos a la base de datos.
+    formEliminar.onsubmit = async(event) =>{
+         event.preventDefault();
+         let mca = parseInt(mca_borrado.value)
+            let response = await fetch('/api/eliminar-producto/'+id.value+'/'+mca, { method: 'PUT'});
             let result = await response.json();
-    };
+        };
     //Funcion que añade un producto de la base de datos.
     formElem.onsubmit = async(e) => {
             e.preventDefault();
@@ -182,10 +201,10 @@
       var textoCelda = document.createTextNode(producto.price);
       }
       if(j===5){
-        if(producto.mca_borrado === 0){
+        if(producto.mca_borrado === 1){
             var textoCelda = document.createTextNode( "Disponible");
             }
-            if(producto.mca_borrado === 1){
+            if(producto.mca_borrado === 0){
             var textoCelda = document.createTextNode( "Baja");
             }
       }
@@ -205,6 +224,8 @@
         formModificando.reset();
   }
     obtenerProductos();
+
+
 
      </script>
 

@@ -32,3 +32,4 @@ Route:: apiResource('/products',ListProductApiController::class);
 
 Route:: apiResource('/categories',CategoryApiController::class);
 Route:: apiResource('/cart',CartApiController::class);
+Route::put('eliminar-producto/{id}/{mca_borrado}', 'App\Http\Controllers\Api\ProductApiController@updateBaja');
