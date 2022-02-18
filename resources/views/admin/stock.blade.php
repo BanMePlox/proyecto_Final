@@ -88,7 +88,7 @@
                         <td>Cantidad de Stock</td>
                     </tr>
                     @forelse ($products as $product)
-                    @if ($product->stock < 10 && $product->disponible == 1)
+                    @if ($product->stock < 10 && $product->mca_borrado == 1)
                     <tr>
                         <td><img class="Imagen__Producto" src="{{URL::asset('Imagenes/'.$product->file_path)}}" alt="Imagen Producto"></td>
                         <td>{{$product->name}}</td>

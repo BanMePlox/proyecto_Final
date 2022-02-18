@@ -83,6 +83,7 @@ async function elegirCategoria(id) {
             nombre_producto.classList.add('nombre_producto');
             precio.classList.add('precio');
             img.classList.add("imagen__producto");
+            img.alt="Imagen producto";
             descripcion.classList.add('descripcion');
             nombre_producto.textContent = producto.name;
             precio.textContent = producto.price + "€";
@@ -225,7 +226,7 @@ function anyadirCarrito(evento){
     infoProducto.classList.add('infoCarrito');
     infoProducto.textContent = `${numeroUnidadesItem} x ${miItem[0].name} - ${miItem[0].price}€`;
     const miBoton = document.createElement('button');
-    miBoton.classList.add('btnElimiar');
+    miBoton.classList.add('btnEliminar');
     miBoton.textContent = 'Eliminar';
     miBoton.dataset.item = item;
     miBoton.addEventListener('click', borrarItemCarrito);
@@ -243,7 +244,7 @@ function anyadirCarrito(evento){
     const article = document.querySelector('article');
     hr.classList.add('ContenedorTotal')
     article.append(hr);
-    precioTotal.textContent = 'Total: ' + calcularTotal();
+    precioTotal.textContent = 'Total: ' + calcularTotal() + '€';
     hr.append(precioTotal);
     hr.append(botonVaciar);
 

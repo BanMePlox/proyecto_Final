@@ -7,7 +7,7 @@
     <article>
         <section class="mas__vendidos">
             @forelse($products as $product)
-            @if ($product->disponible == 1 && $contador < 5 && $product->sold > 10)
+            @if ($product->mca_borrado == 1 && $contador < 5 && $product->sold > 10)
             <div class="producto">
                 <a href="{{Route('products.show', $product->id)}}">
                     <img class="imagen__producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Productos">

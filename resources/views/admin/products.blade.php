@@ -43,7 +43,7 @@
   </form>
 
    <form id="formElem_modificar" style="display:none">
-    <input type="text" name="id" value="Id del producto" id="idProducto" placeholder="Id del producto">
+    <input type="text" name="id" id="idProducto" placeholder="Id del producto">
  <input type="text" name="name" id="name" placeholder="Nombre del producto">
   <select name="category_id" id="select_category_id2">
       <option value="1">Pescaderia</option>
@@ -182,10 +182,10 @@
       var textoCelda = document.createTextNode(producto.price);
       }
       if(j===5){
-        if(producto.mca_borrado === 0){
+        if(producto.mca_borrado === 1){
             var textoCelda = document.createTextNode( "Disponible");
             }
-            if(producto.mca_borrado === 1){
+            if(producto.mca_borrado === 0){
             var textoCelda = document.createTextNode( "Baja");
             }
       }

@@ -81,7 +81,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $products = Product::all();
-        if($product->disponible == '0') {
+        if($product->mca_borrado == '0') {
             return redirect('/products');
         }
         return view('products.show', compact('products', 'product',));
