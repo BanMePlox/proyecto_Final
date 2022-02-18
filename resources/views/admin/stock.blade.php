@@ -40,7 +40,7 @@
                         </tr>
                     @forelse ($productdesc as $productdescs)
                         <tr class="cabecera__tabla">
-                            <td><img src="{{Storage::url('product/'.$productdescs->file_path)}}" alt="Imagen Productos" class="Imagen__Producto"></td>
+                            <td><img src="{{URL::asset('Imagenes/'.$productdescs->file_path)}}" alt="Imagen Productos" class="Imagen__Producto"></td>
                             <td>{{$productdescs->name}}</td>
                             <td>{{$productdescs->sold}}</td>
                             <td>{{$productdescs->price}}</td>
@@ -90,7 +90,7 @@
                     @forelse ($products as $product)
                     @if ($product->stock < 10 && $product->disponible == 1)
                     <tr>
-                        <td><img class="Imagen__Producto" src="{{Storage::url('product/'.$product->file_path)}}" alt="Imagen Producto"></td>
+                        <td><img class="Imagen__Producto" src="{{URL::asset('Imagenes/'.$product->file_path)}}" alt="Imagen Producto"></td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->stock}}</td>
                     </tr>
