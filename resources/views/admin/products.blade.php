@@ -151,6 +151,7 @@ formEliminar.onsubmit = async (event) => {
     let mca = parseInt(mca_borrado.value)
     let response = await fetch('/api/eliminar-producto/' + id.value + '/' + mca, { method: 'PUT' });
     let result = await response.json();
+    limpiarFormulario3();
 };
 //Funcion que añade un producto de la base de datos.
 formElem.onsubmit = async (e) => {
@@ -223,7 +224,13 @@ function limpiarFormulario() {
 function limpiarFormulario2() {
     formModificando.reset();
 }
+
+function limpiarFormulario3() {
+        formEliminar.reset();
+  }
 obtenerProductos();
+
+
 
 
      </script>
