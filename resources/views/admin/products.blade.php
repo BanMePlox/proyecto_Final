@@ -61,12 +61,7 @@
 
     <table class="tabla">
         <h1>LISTA DE PRODUCTOS</h1>
-        <div id="buscador">
-            <form action="" id="busqueda">
-            <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
-            <input type="text" placeholder="Busca tus productos">
-            </form>
-        </div>
+
         <tr class="cabecera__tabla">
             <td>ID Producto</td>
             <td>Nombre Producto</td>
