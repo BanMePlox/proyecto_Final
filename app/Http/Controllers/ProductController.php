@@ -84,7 +84,7 @@ class ProductController extends Controller
         if($product->disponible == '0') {
             return redirect('/products');
         }
-        return view('products.show', compact('products', 'product'));
+        return view('products.show', compact('products', 'product',));
     }
 
     /**
