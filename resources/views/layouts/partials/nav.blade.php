@@ -221,12 +221,9 @@ function anyadirCarrito(evento){
     let div = document.createElement('div');
     div.classList.add('divCarrito');
     crearArticle.append(div);
-    let img = document.createElement('img');
-    img.classList.add('imagenCarrito')
     let infoProducto = document.createElement('p');
     infoProducto.classList.add('infoCarrito');
     infoProducto.textContent = `${numeroUnidadesItem} x ${miItem[0].name} - ${miItem[0].price}€`;
-    img.src = `../Imagenes/${miItem.name}.webp`;
     const miBoton = document.createElement('button');
     miBoton.classList.add('btnElimiar');
     miBoton.textContent = 'Eliminar';
@@ -234,7 +231,6 @@ function anyadirCarrito(evento){
     miBoton.addEventListener('click', borrarItemCarrito);
     // Añadimos al html
     div.append(miBoton);
-    div.append(img);
     div.append(infoProducto);
     });
     const botonVaciar = document.createElement('button');
