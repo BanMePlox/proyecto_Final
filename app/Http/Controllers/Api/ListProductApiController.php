@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
@@ -17,8 +16,8 @@ class ListProductApiController extends Controller
     public function index()
     {
 
-        $sql = Product::all()->where('mca_borrado','===', 0);
-        $products = DB::select($sql);
+
+        $products = Product::all();
         return response()->json($products,200);
     }
 

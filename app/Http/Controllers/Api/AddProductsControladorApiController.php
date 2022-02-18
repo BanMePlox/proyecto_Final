@@ -49,7 +49,7 @@ class AddProductsControladorApiController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        $product->delete();
+        $product->mca_borrado=1;
         return response()->json($product,201);
     }
 
@@ -60,19 +60,9 @@ class AddProductsControladorApiController extends Controller
      * @param  \App\Models\AddProducts  $addProducts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Product $product)
     {
-     $productoActualizado = Product::find($request);
-     $productoActualizado->name = $request->name;
-     $productoActualizado->price = $request->price;
-     $productoActualizado->description = $request->description;
-     $productoActualizado->stock = $request->stock;
-     $productoActualizado->file_path = $request->file_path;
-     $productoActualizado->impuesto = $request->impuesto;
-     $productoActualizado->descuento = $request->descuento;
-     $productoActualizado->category_id = $request->category_id;
-     $productoActualizado->save();
-     return response()->json($productoActualizado,201);
+
  }
 
     /**

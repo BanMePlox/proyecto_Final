@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,21 +13,13 @@
         <a href="{{route('products.index')}}"><img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo"></a>
         <a href="{{route('indexadmin')}}">Admin menu</a>
     </header>
-
-<<<<<<< HEAD
-<form id="BotonesPrincipales"  type="POST" enctype="multipart/formdata" style="display:" class="">
-    <button type="submit" id="boton_anyadir" value="Añadir" onclick="anyadirProductos(event)">Añadir productos</button>
-    <button type="submit" id="boton_anyadir" value="Añadir" onclick="modificarProductos(event)">Modificar un producto</button>
-    <button type="submit" id="boton_anyadir" value="Añadir" onclick="eliminarProductos(event)">Eliminar un producto</button>
-=======
+<section>
 <form id="BotonesPrincipales"  type="POST" enctype="multipart/formdata" style="display:">
     <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="anyadirProductos(event)">Añadir productos</button>
-    <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="modificarProductos()">Modificar un producto</button>
-    <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="eliminarProductos()">Eliminar un producto</button>
->>>>>>> 34685455a91587f6ef048bb1caca8fa693bca30c
+    <button type="submit" id="boton_anyadir" class="boton__index-admin"value="Añadir" onclick="modificarProductos(event)">Modificar un producto</button>
 
 </form>
-
+</section>
 <article>
     <table class="tabla">
         <h1>LISTA DE PRODUCTOS</h1>
@@ -37,6 +30,7 @@
             </form>
         </div>
         <tr class="cabecera__tabla">
+            <td></td>
             <td>ID Producto</td>
             <td>Nombre Producto</td>
             <td>Stock</td>
@@ -46,6 +40,7 @@
         </tr>
         @forelse ($products as $product)
         <tr>
+            <td><input type="checkbox" name="skills" onclick="eliminarProducto($product->id)"></td>
             <td>{{$product->id}}</td>
             <td>{{$product->name}}</td>
             <td>{{$product->stock}}</td>
@@ -84,12 +79,6 @@
     <input type="number" class="form-control" name="stock">
     <button type="submit" id="boton_anyadir" value="Añadir">Añadir</button>
     <button type="submit" id="boton_atras1" value="Eliminar" onclick="anyadirProductos(event)">Atras</button>
-  </form>
-
-    <form id="formElem_eliminar"  type="POST" style="display:none">
-    <input type="text" name="name" value="Nombre del producto" id="name">
-    <button type="submit" id="boton_eliminar" value="Eliminar" >Eliminar</button>
-    <button type="submit" id="boton_atras1" value="Eliminar" onclick="eliminarProductos()">Atras</button>
   </form>
 
    <form id="formElem_modificar" style="display:none">
@@ -148,18 +137,6 @@
             }
 
     }
-    async function eliminarProductos(event){
-        event.preventDefault();
-        const botonesPrincipales = document.querySelector('#BotonesPrincipales');
-            if (botonesPrincipales.style.display=="none") {
-                botonesPrincipales.style.display = "";
-                formEleminar.style.display="none";
-            } else {
-                botonesPrincipales.style.display = "none";
-                formEleminar.style.display="";
-            }
-
-    }
 
     //Funcion que modifica los productos
      formModificar.onsubmit = async(e) => {
@@ -168,7 +145,7 @@
             e.preventDefault();
             let response = await fetch('/api/products', { method: 'GET' });
             let products = await response.json();
-             products.forEach((producto)=>{
+             products.forEach((producto) => {
                        if(producto.id == idProducto) {
                            mostrarProductoParaModificar(producto);
                         }
@@ -198,15 +175,14 @@ async function guardarDatosEditados(){
 
     //Funcion que elimina los productos a la base de datos.
 
-    formElem.onsubmit = async(e) => {
-            e.preventDefault();
-            let response = await fetch('/api/productos', {
-                method: 'POST',
+    async function eliminarProductos(idProducto){
+        let response = await fetch('/api/productos', {
+                method: 'PATCH',
                 body: new FormData(formElem)
             });
 
             let result = await response.json();
-        };
+    };
     //Funcion que añade un producto de la base de datos.
     formElem.onsubmit = async(e) => {
             e.preventDefault();

@@ -37,8 +37,8 @@
                 @endif
 
                <li>
-                    <button href="#" id="cart">
-                        <a href="{{route('carrito')}}"><img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito"></a>
+                    <button href="#" id="cart" onclick="mostrarCarrito()">
+                    <img src="{{URL::asset('Imagenes/carroVacio.png')}}" alt="carrito"></a>
                     <p id="carro"></p>
                     </button>
                 </li>
@@ -49,23 +49,22 @@
 
 <script>
 
-let carrito = [];
 let productosCarrito = 0;
 let idProdoductosMostrados = 0;
 let products;
 let productosMostrados = [];
-
+let carrito =[];
+let cantidad
 async function elegirCategoria(id) {
     idProdoductosMostrados = 0;
-    console.log(id);
     let response = await fetch('api/products/' + id);
     products = await response.json();
     //Elimina los productos mostrados
     const eliminarArticle = document.querySelector('article');
     eliminarArticle.remove();
     //Recoge el main
-    let main = document.querySelector('main');
     //Crea un article y lo añane dentro del main.
+    let main = document.querySelector('main');
     let crearArticle = document.createElement('article');
     main.append(crearArticle);
     //Crea una seccion y la añade dentro del article
@@ -111,10 +110,8 @@ async function elegirCategoria(id) {
             const boton = document.createElement('button');
             boton.classList.add('btn', 'btn-primary', 'btn__producto');
             boton.textContent = "Añadir al carrito";
-            boton.addEventListener('click', function() {
-                carrito.push(producto.id);
-                actualizarCarrito();
-            });
+            boton.setAttribute('marcador', producto.id);
+            boton.addEventListener('click', anyadirCarrito);
             divBoton.append(boton);
             idProdoductosMostrados++;
             productosMostrados.push(producto.id);
@@ -186,10 +183,8 @@ async function mostrarMasProductos() {
             const boton = document.createElement('button');
             boton.classList.add('btn', 'btn-primary', 'btn__producto')
             boton.textContent = "Añadir al carrito";
-            boton.addEventListener('click', function() {
-                carrito.push(producto.id);
-                actualizarCarrito();
-            });
+            boton.setAttribute('marcador', producto);
+            boton.addEventListener('click', anyadirCarrito);
             divBoton.append(boton);
             idProdoductosMostrados++;
             productosMostrados.push(producto.id);
@@ -205,28 +200,89 @@ async function mostrarMasProductos() {
     section.append(verMas);
 };
 
-async function actualizarCarrito() {
-    let response = await fetch('api/products', { method: 'GET' });
-    let products = await response.json();
-
-    products.forEach((producto) => {
-        for (let id of carrito) {
-            if (producto.id === id) {
-                anyadirCarrito(producto);
-                break;
-            }
-        }
-    })
-};
-async function anyadirCarrito(producto) {
-    let envio = {amount: producto.amount};
-    let response = await fetch('api/cart', {
-        method: 'POST',
-        body: JSON.stringify(envio),
-    });
-    let respuesta = await response.json();
-    const carro = document.querySelector('#carro');
-    productosCarrito++;
-    carro.textContent = productosCarrito;
+function anyadirCarrito(evento){
+    carrito.push(evento.target.getAttribute('marcador'))
+    let btnCarrito = document.querySelector('#carro');
+    btnCarrito.textContent= carrito.length;
 }
-</script>
+
+ function mostrarCarrito() {
+    const eliminarArticle = document.querySelector('article');
+    eliminarArticle.remove();
+    let crearArticle = document.createElement('article');
+    let main = document.querySelector('main');
+    const carritoSinDuplicados = [...new Set(carrito)];
+    carritoSinDuplicados.forEach((item) => {
+        // Obtenemos el item que necesitamos de la variable base de datos
+        const miItem = products.filter((itemBaseDatos) => {
+        // ¿Coincide las id? Solo puede existir un caso
+        return itemBaseDatos.id === parseInt(item);
+    });
+    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+    // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+    return itemId === item ? total += 1 : total;
+    }, 0);
+    main.append(crearArticle);
+    //Crea el primer div que es el contenedor.
+    let div = document.createElement('div');
+    div.classList.add('divCarrito');
+    crearArticle.append(div);
+    let img = document.createElement('img');
+    img.classList.add('imagenCarrito')
+    let infoProducto = document.createElement('p');
+    infoProducto.classList.add('infoCarrito');
+    infoProducto.textContent = `${numeroUnidadesItem} x ${miItem[0].name} - ${miItem[0].price}€`;
+    img.src = `../Imagenes/${miItem.name}.webp`;
+    const miBoton = document.createElement('button');
+    miBoton.classList.add('btnElimiar');
+    miBoton.textContent = 'Eliminar';
+    miBoton.dataset.item = item;
+    miBoton.addEventListener('click', borrarItemCarrito);
+    // Añadimos al html
+    div.append(miBoton);
+    div.append(img);
+    div.append(infoProducto);
+    });
+    const botonVaciar = document.createElement('button');
+    botonVaciar.addEventListener('click',vaciarCarrito)
+    botonVaciar.classList.add('botonVaciar');
+    botonVaciar.textContent='Vaciar Carrito';
+    const precioTotal = document.createElement('p');
+    precioTotal.classList.add('precioTotal')
+    const hr = document.createElement('hr');
+    const article = document.querySelector('article');
+    hr.classList.add('ContenedorTotal')
+    article.append(hr);
+    precioTotal.textContent = 'Total: ' + calcularTotal();
+    hr.append(precioTotal);
+    hr.append(botonVaciar);
+
+ }
+    function borrarItemCarrito(evento){
+        const id = evento.target.dataset.item;
+         // Borramos todos los productos
+        carrito = carrito.filter((carritoId) => {
+        return carritoId !== id;
+        });
+              // volvemos a renderizar
+              mostrarCarrito();
+    }
+          function calcularTotal() {
+              // Recorremos el array del carrito
+              return carrito.reduce((total, item) => {
+                  // De cada elemento obtenemos su precio
+                  const miItem = products.filter((itemBaseDatos) => {
+                      return itemBaseDatos.id === parseInt(item);
+                  });
+                  // Los sumamos al total
+                  return total + miItem[0].price;
+              }, 0).toFixed(2);
+          }
+          function vaciarCarrito() {
+              // Limpiamos los productos guardados
+              carrito = [];
+              // Renderizamos los cambios
+              mostrarCarrito();
+          }
+
+    </script>

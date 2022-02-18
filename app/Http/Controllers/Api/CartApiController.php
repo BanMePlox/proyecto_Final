@@ -27,10 +27,9 @@ class CartApiController extends Controller
     public function store(Request $request)
     {
         $cart= new Cart();
-        $cart->product_id = "1";
-        $cart->amount = $request->get('amount');
+        $cart->product_id = $request ->get('product_id');
         $cart->save();
-        return response()->json($cart,200);
+        return response()->json($cart,201);
     }
 
     /**
