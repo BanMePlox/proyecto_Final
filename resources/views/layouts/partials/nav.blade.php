@@ -4,8 +4,8 @@
         <a href="{{route('products.index')}}"><img src="{{URL::asset('Imagenes/logoJuanadona.png')}}" alt="Logo" id="logo"></a>
         <div id="buscador">
             <form action="" id="busqueda">
-            <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa">
-            <input type="text" placeholder="Busca tus productos">
+            <input type="text" id="texto" placeholder="Busca tus productos">
+            <img src="{{URL::asset('Imagenes/lupa.png')}}" alt="lupa"></span>
             </form>
         </div>
             <ul id="linea__media">

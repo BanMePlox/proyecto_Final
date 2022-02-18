@@ -24,9 +24,9 @@
 
 
 {{---Formulario para añadir productos---}}
+<form id="formElem_anyadir" enctype="multipart/formdata" style="display:none">
 @csrf
 @method('POST')
-<form id="formElem_anyadir" enctype="multipart/formdata" style="display:none">
     <input type="text" name="name" placeholder="Nombre del producto">
     <input type="text" name="description"  placeholder="Descripcion">
     <select name="category_id" id="select_category_id">
@@ -43,24 +43,19 @@
   </form>
 
    <form id="formElem_modificar" style="display:none">
-    <input type="text" name="id" value="Id del producto" id="idProducto">
-    <button type="submit" id="boton_buscar" value="Buscar">Buscar</button>
-    <button type="submit" id="boton_atras1" value="Eliminar" onclick="modificarProductos()">ATRAS</button>
-  </form>
-
- <form id="formElem_modificando" style="display:none">
- <input type="text" name="name" id="name">
-  <input type="text" name="description" id="description">
-  <select name="category_id" id="select_category_id">
+    <input type="text" name="id" value="Id del producto" id="idProducto" placeholder="Id del producto">
+ <input type="text" name="name" id="name" placeholder="Nombre del producto">
+  <select name="category_id" id="select_category_id2">
       <option value="1">Pescaderia</option>
       <option value="2">Carniceria</option>
       <option value="3">Panaderia</option>
   </select>
-  <input type="number" class="form-control" name="price" id="price">
-  <input type="number" class="form-control" name="impuesto" id="impuesto">
-  <input type="number" class="form-control" name="descuento" id="descuento">
-  <input type="number" class="form-control" name="stock" id="stock">
-  <button type="submit" id="boton_editar" value="Buscar" onclick="guardarDatosEditados()">EDITAR</button>
+  <input type="text" name="description" id="description" placeholder="Descripcion">
+  <input type="number" class="form-control" name="price" id="price" placeholder="Precio">
+  <input type="number" class="form-control" name="impuesto" id="impuesto" placeholder="Impuestos">
+  <input type="number" class="form-control" name="descuento" id="descuento" placeholder="Descuento">
+  <input type="number" class="form-control" name="stock" id="stock" placeholder="stock">
+  <button type="submit" id="boton_editar" value="Buscar">EDITAR</button>
   <button type="submit" id="boton_atras1" value="Eliminar" onclick="modificarProductos()">ATRAS</button>
 </form>
 
@@ -89,8 +84,7 @@
 
 <script>
       const formElem = document.querySelector('#formElem_anyadir');
-   const formModificar = document.querySelector('#formElem_modificar');
-   const formModificando = document.querySelector('#formElem_modificando');
+   const formModificando = document.querySelector('#formElem_modificar');
    const formEleminar = document.querySelector('#formElem_eliminar');
 
     //Hace visible el formulario de añadir productos.
@@ -111,48 +105,28 @@
         const botonesPrincipales = document.querySelector('#BotonesPrincipales');
             if (botonesPrincipales.style.display=="none") {
                 botonesPrincipales.style.display = "";
-                formModificar.style.display="none";
+                formModificando.style.display="none";
             } else {
                 botonesPrincipales.style.display = "none";
-                formModificar.style.display="";
+                formModificando.style.display="";
             }
 
     }
 
     //Funcion que modifica los productos
-     formModificar.onsubmit = async(e) => {
-            const id =document.querySelector('#idProducto');
-            let idProducto = id.value;
-            e.preventDefault();
-            let response = await fetch('/api/products', { method: 'GET' });
-            let products = await response.json();
-             products.forEach((producto) => {
-                       if(producto.id == idProducto) {
-                           mostrarProductoParaModificar(producto);
-                        }
-             })
-        };
-    async function mostrarProductoParaModificar(producto) {
-        const name =document.querySelector('#name');
-        const description =document.querySelector('#description');
-        const price =document.querySelector('#price');
-        const impuesto = document.querySelector('#impuesto');
-        const stock = document.querySelector('#stock');
-        name.textContent = producto.name;
-        description.textContent = producto.description;
-        price.textContent = producto.price;
-        impuesto.textContent = producto.impuesto;
-        stock.textContent= producto.stock;
-        formModificando.style.display="";
-    }
-async function guardarDatosEditados(){
-    const id =document.querySelector('#idProducto');
-    let response = await fetch('/api/productos', {
-                method: 'PUT',
-                body: new FormData(formModificando)
-            });
+     formModificando.onsubmit = async(event) =>{
+         event.preventDefault();
+         let name = document.querySelector('#name');
+         let category = document.querySelector('#select_category_id2');
+         let id = document.querySelector('#idProducto');
+            let producto ={name: name.value, category_id: category.value};
+            let response = await fetch('/api/actualizar-producto/'+id.value +'/'+ name.value +'/'+ category.value+'/'+ price.value+'/'+ description.value+'/'+ stock.value+'/'+ impuesto.value+'/'+ descuento.value, { method: 'PUT'});
 
-}
+            obtenerProductos();
+            limpiarFormulario2();
+            let result = await response.json();
+        };
+
 
     //Funcion que elimina los productos a la base de datos.
 
@@ -231,6 +205,9 @@ async function guardarDatosEditados(){
     }
     function limpiarFormulario() {
         formElem.reset();
+  }
+  function limpiarFormulario2() {
+        formModificando.reset();
   }
     obtenerProductos();
 

@@ -43,12 +43,21 @@ class ProductApiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Product  $productº
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id,$name,$category_id,$price,$description, $stock,$impuesto,$descuento)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->name = $name;
+        $product->category_id = $category_id;
+        $product->price =$price;
+        $product->description = $description;
+        $product->stock = $stock;
+        $product->impuesto = $impuesto;
+        $product->descuento =$descuento;
+        $product->save();
+        return response()->json($product,200);
     }
 
     /**

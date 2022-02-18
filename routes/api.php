@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 /*Route::apiResource('/apiproducts', ProductApiController::class);*/
+Route::put('actualizar-producto/{id}/{name}/{category_id}/{price}/{description}/{stock}/{impuesto}/{descuento}', 'App\Http\Controllers\Api\ProductApiController@update');
 // Route::apiResource('/apiusers', UserApiController::class);
 // Route::apiResource('/apicategories', CategoryApiController::class);
 Route::apiResource('/productos',AddProductsControladorApiController::class)->
